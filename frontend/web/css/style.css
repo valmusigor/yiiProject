@@ -1,0 +1,25 @@
+.expired{
+background: red;
+}
+.item {
+  color:white;
+  text-decoration:none;
+}
+.menu{
+    padding: 5px;
+    background: #007bff;
+    border-radius: 10px  0 10px 0;
+    box-shadow:         11px 9px 10px 0px rgba(0, 123, 255, 0.41);
+    margin-right: 15px;
+}
+.menu a:hover{  
+    color:red;
+}
+.wrap {
+    display:flex;
+    justify-content:space-between;
+}
+.logo a{
+    text-decoration: none;
+    color:black;
+}
