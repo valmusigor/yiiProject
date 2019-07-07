@@ -46,6 +46,7 @@ return [
                 '/register'=>'user/register',
                 '/auth'=>'user/auth',
                 '/auth/add'=>'user/add',
+                'task/delete/<deleteId:\d+>' => 'task/delete',
                 [
                 'pattern' => 'task/<sort:(up|down){0,1}>',
                 'route' => 'task/index',

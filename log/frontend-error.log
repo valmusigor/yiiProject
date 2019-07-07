@@ -1411,3 +1411,78 @@ yii\base\InvalidRouteException: Unable to resolve the request: task/downdown in 
 Stack trace:
 #0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('downdown', Array)
 #1 /var/www/task.local/vendor/" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /task/downdown HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend"
+2019/07/07 21:59:00 [error] 3766#3766: *42 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "task/delete/7". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('task/delete/7', Array)
+#1 /var/www/task.local/vend" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /task/delete/7 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/task"
+2019/07/07 21:59:53 [error] 3766#3766: *44 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "task/delete/7". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('task/delete/7', Array)
+#1 /var/www/task.local/vend" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /task/delete/7 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/task"
+2019/07/07 22:00:36 [error] 3766#3766: *44 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\BadRequestHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\BadRequestHttpException))
+#4 {main}
+Previous exception:
+yii\web\BadRequestHttpException: Отсутствуют обязательные параметры: id in /var/www/task.local/vendor/yiisoft/yii2/web/Controller.php:149
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/InlineAction.php(51): yii\web\Controller->bindActionParams(Object(y" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /task/delete/7 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/task"
+2019/07/07 22:01:57 [error] 3766#3766: *49 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\BadRequestHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\BadRequestHttpException))
+#4 {main}
+Previous exception:
+yii\web\BadRequestHttpException: Отсутствуют обязательные параметры: id in /var/www/task.local/vendor/yiisoft/yii2/web/Controller.php:149
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/InlineAction.php(51): yii\web\Controller->bindActionParams(Object(y" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /task/delete/7 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/task"
+2019/07/07 22:02:34 [error] 3766#3766: *49 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "task/delete/7". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('task/delete/7', Array)
+#1 /var/www/task.local/vend" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /task/delete/7 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/task"
+2019/07/07 22:03:02 [error] 3766#3766: *49 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\BadRequestHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\BadRequestHttpException))
+#4 {main}
+Previous exception:
+yii\web\BadRequestHttpException: Отсутствуют обязательные параметры: id in /var/www/task.local/vendor/yiisoft/yii2/web/Controller.php:149
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/InlineAction.php(51): yii\web\Controller->bindActionParams(Object(y" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /task/delete/7 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/task"

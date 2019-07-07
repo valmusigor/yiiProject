@@ -11,7 +11,6 @@ class User extends ActiveRecord{
     public static function tableName() {
         return '{{users}}';
     }
-
     public function scenarios() {
         return [
             self::SCENARIO_REGISTER => ['login','pass','email'],

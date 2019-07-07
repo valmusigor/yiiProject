@@ -3,6 +3,7 @@ use yii\helpers\Url;
 use frontend\assets\CommonAsset;
 CommonAsset::register($this);
 ?>
+    <div style="color:red"><?=$error?></div>
     <div style="display:flex;justify-content:space-between">
       <?=$this->render('add');?>
       <span>
@@ -22,6 +23,5 @@ CommonAsset::register($this);
     <form action="/task/update">
       <?=$this->render('list',['tasks'=>$tasks]); ?>
     </form>
-    <div><?=$error?></div>
     <?php $this->registerJsFile('/js/createTaskEdit.js'); ?>
 
