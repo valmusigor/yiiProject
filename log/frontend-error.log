@@ -1486,3 +1486,392 @@ Previous exception:
 yii\web\BadRequestHttpException: Отсутствуют обязательные параметры: id in /var/www/task.local/vendor/yiisoft/yii2/web/Controller.php:149
 Stack trace:
 #0 /var/www/task.local/vendor/yiisoft/yii2/base/InlineAction.php(51): yii\web\Controller->bindActionParams(Object(y" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /task/delete/7 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/task"
+2019/07/08 11:39:25 [error] 974#974: *162 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "file/file/upload". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('file/file/uploa...', Array)
+#1 /var/www/task.lo" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "POST /file/file/upload HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/"
+2019/07/08 12:59:11 [error] 1027#1027: *6 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "file/file/upload". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('file/file/uploa...', Array)
+#1 /var/www/task.lo" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "POST /file/file/upload HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/"
+2019/07/08 15:59:45 [error] 1011#1011: *70 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\web\NotFoundHttpException: Unable to find debug data tagged with '5d22fcd775c52'. in /var/www/task.local/vendor/yiisoft/yii2-debug/src/controllers/DefaultController.php:225
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2-debug/src/controllers/DefaultController.php(105): yii\debug\controlle" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /debug/default/view?tag=5d22fcd775c52&panel=log HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/debug/default/view?tag=5d22fcd775c52&panel=router"
+2019/07/08 15:59:45 [error] 1011#1011: *70 FastCGI sent in stderr: "PHP message: PHP Warning:  The use statement with non-compound name 'Yii' has no effect in /var/www/task.local/frontend/views/file/fileList.php on line 1" while reading response header from upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /file/index HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/"
+2019/07/08 16:01:50 [error] 1011#1011: *75 FastCGI sent in stderr: "PHP message: PHP Warning:  The use statement with non-compound name 'Yii' has no effect in /var/www/task.local/frontend/views/file/fileList.php on line 1" while reading response header from upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /file/index HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/"
+2019/07/08 16:06:25 [error] 1011#1011: *91 FastCGI sent in stderr: "PHP message: PHP Warning:  The use statement with non-compound name 'Yii' has no effect in /var/www/task.local/frontend/views/file/fileList.php on line 1" while reading response header from upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /file/index HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/"
+2019/07/08 16:06:25 [error] 1011#1011: *91 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "var/www/task.local/frontend/web/uploadImages/3/3f6fc8d8c9d1760fd6a83b0a81b90207.jpg". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /var/www/task.local/frontend/web/uploadImages/3/3f6fc8d8c9d1760fd6a83b0a81b90207.jpg HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:06:25 [error] 1011#1011: *94 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "var/www/task.local/frontend/web/uploadImages/1/13e20e254643d6e871f46b54164929b6.jpg". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /var/www/task.local/frontend/web/uploadImages/1/13e20e254643d6e871f46b54164929b6.jpg HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:09:25 [error] 1011#1011: *98 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "var/www/task.local/frontend/web/uploadImages/3/3f6fc8d8c9d1760fd6a83b0a81b90207.jpg". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /var/www/task.local/frontend/web/uploadImages/3/3f6fc8d8c9d1760fd6a83b0a81b90207.jpg HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:09:25 [error] 1011#1011: *102 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "var/www/task.local/frontend/web/uploadImages/1/13e20e254643d6e871f46b54164929b6.jpg". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /var/www/task.local/frontend/web/uploadImages/1/13e20e254643d6e871f46b54164929b6.jpg HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:09:30 [error] 1011#1011: *102 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "var/www/task.local/frontend/web/uploadImages/3/3f6fc8d8c9d1760fd6a83b0a81b90207.jpg". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /var/www/task.local/frontend/web/uploadImages/3/3f6fc8d8c9d1760fd6a83b0a81b90207.jpg HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:09:30 [error] 1011#1011: *98 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "var/www/task.local/frontend/web/uploadImages/7/70929afde7bf88503a68d913d289045c.jpg". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /var/www/task.local/frontend/web/uploadImages/7/70929afde7bf88503a68d913d289045c.jpg HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:09:30 [error] 1011#1011: *113 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "var/www/task.local/frontend/web/uploadImages/1/13e20e254643d6e871f46b54164929b6.jpg". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /var/www/task.local/frontend/web/uploadImages/1/13e20e254643d6e871f46b54164929b6.jpg HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:11:22 [error] 1011#1011: *116 FastCGI sent in stderr: "PHP message: PHP Warning:  The use statement with non-compound name 'Yii' has no effect in /var/www/task.local/frontend/views/file/fileList.php on line 1" while reading response header from upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /file/index HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:11:23 [error] 1011#1011: *116 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "var/www/task.local/frontend/web/uploadImages/3/3f6fc8d8c9d1760fd6a83b0a81b90207.jpg". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /var/www/task.local/frontend/web/uploadImages/3/3f6fc8d8c9d1760fd6a83b0a81b90207.jpg HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:11:23 [error] 1011#1011: *119 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "var/www/task.local/frontend/web/uploadImages/1/13e20e254643d6e871f46b54164929b6.jpg". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /var/www/task.local/frontend/web/uploadImages/1/13e20e254643d6e871f46b54164929b6.jpg HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:11:23 [error] 1011#1011: *121 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "var/www/task.local/frontend/web/uploadImages/7/70929afde7bf88503a68d913d289045c.jpg". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /var/www/task.local/frontend/web/uploadImages/7/70929afde7bf88503a68d913d289045c.jpg HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:11:42 [error] 1011#1011: *116 FastCGI sent in stderr: "PHP message: PHP Warning:  The use statement with non-compound name 'Yii' has no effect in /var/www/task.local/frontend/views/file/fileList.php on line 1" while reading response header from upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /file/index HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:11:43 [error] 1011#1011: *119 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "var/www/task.local/frontend/web/uploadImages/3/3f6fc8d8c9d1760fd6a83b0a81b90207.jpg". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /var/www/task.local/frontend/web/uploadImages/3/3f6fc8d8c9d1760fd6a83b0a81b90207.jpg HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:11:43 [error] 1011#1011: *121 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "var/www/task.local/frontend/web/uploadImages/1/13e20e254643d6e871f46b54164929b6.jpg". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /var/www/task.local/frontend/web/uploadImages/1/13e20e254643d6e871f46b54164929b6.jpg HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:11:43 [error] 1011#1011: *122 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "var/www/task.local/frontend/web/uploadImages/7/70929afde7bf88503a68d913d289045c.jpg". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /var/www/task.local/frontend/web/uploadImages/7/70929afde7bf88503a68d913d289045c.jpg HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:11:43 [error] 1011#1011: *123 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "task.local/frontend/web/uploadImages/1/13e20e254643d6e871f46b54164929b6.jpg". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module-" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /task.local/frontend/web/uploadImages/1/13e20e254643d6e871f46b54164929b6.jpg HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:12:00 [error] 1011#1011: *116 FastCGI sent in stderr: "PHP message: PHP Warning:  The use statement with non-compound name 'Yii' has no effect in /var/www/task.local/frontend/views/file/fileList.php on line 1" while reading response header from upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /file/index HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:12:00 [error] 1011#1011: *119 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "var/www/task.local/frontend/web/uploadImages/3/3f6fc8d8c9d1760fd6a83b0a81b90207.jpg". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /var/www/task.local/frontend/web/uploadImages/3/3f6fc8d8c9d1760fd6a83b0a81b90207.jpg HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:12:00 [error] 1011#1011: *121 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "var/www/task.local/frontend/web/uploadImages/1/13e20e254643d6e871f46b54164929b6.jpg". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /var/www/task.local/frontend/web/uploadImages/1/13e20e254643d6e871f46b54164929b6.jpg HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:12:00 [error] 1011#1011: *122 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "var/www/task.local/frontend/web/uploadImages/7/70929afde7bf88503a68d913d289045c.jpg". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /var/www/task.local/frontend/web/uploadImages/7/70929afde7bf88503a68d913d289045c.jpg HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:12:00 [error] 1011#1011: *123 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "frontend/web/uploadImages/1/13e20e254643d6e871f46b54164929b6.jpg". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction(" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /frontend/web/uploadImages/1/13e20e254643d6e871f46b54164929b6.jpg HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:18:10 [error] 1011#1011: *140 FastCGI sent in stderr: "PHP message: PHP Warning:  The use statement with non-compound name 'Yii' has no effect in /var/www/task.local/frontend/views/file/fileList.php on line 1" while reading response header from upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /file/index HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:18:10 [error] 1011#1011: *140 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "var/www/task.local/frontend/web/uploadImages/3/3f6fc8d8c9d1760fd6a83b0a81b90207.jpg". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /var/www/task.local/frontend/web/uploadImages/3/3f6fc8d8c9d1760fd6a83b0a81b90207.jpg HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:18:10 [error] 1011#1011: *143 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "var/www/task.local/frontend/web/uploadImages/1/13e20e254643d6e871f46b54164929b6.jpg". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /var/www/task.local/frontend/web/uploadImages/1/13e20e254643d6e871f46b54164929b6.jpg HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:18:10 [error] 1011#1011: *145 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "var/www/task.local/frontend/web/uploadImages/7/70929afde7bf88503a68d913d289045c.jpg". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /var/www/task.local/frontend/web/uploadImages/7/70929afde7bf88503a68d913d289045c.jpg HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:23:33 [error] 1011#1011: *151 FastCGI sent in stderr: "PHP message: PHP Warning:  The use statement with non-compound name 'Yii' has no effect in /var/www/task.local/frontend/views/file/fileList.php on line 1" while reading response header from upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /file/index HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:25:53 [error] 1011#1011: *160 FastCGI sent in stderr: "PHP message: PHP Warning:  The use statement with non-compound name 'Yii' has no effect in /var/www/task.local/frontend/views/file/fileList.php on line 1" while reading response header from upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /file/index HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:29:17 [error] 1011#1011: *168 FastCGI sent in stderr: "PHP message: PHP Warning:  The use statement with non-compound name 'Yii' has no effect in /var/www/task.local/frontend/views/file/fileList.php on line 1" while reading response header from upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /file/index HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:32:39 [error] 1011#1011: *178 FastCGI sent in stderr: "PHP message: PHP Warning:  The use statement with non-compound name 'Yii' has no effect in /var/www/task.local/frontend/views/file/fileList.php on line 1" while reading response header from upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /file/index HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/08 16:55:25 [error] 1011#1011: *196 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "cabinet/file/delete/5". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('cabinet/file/de...', Array)
+#1 /var/www/ta" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /cabinet/file/delete/5 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index?error=%D0%9E%D1%88%D0%B8%D0%B1%D0%BA%D0%B0+%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B8+%D1%84%D0%B0%D0%B9%D0%BB%D0%B0"
+2019/07/08 17:10:53 [error] 1011#1011: *208 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "cabinet/file/delete/5". in /var/www/task.local/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('cabinet/file/de...', Array)
+#1 /var/www/ta" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /cabinet/file/delete/5 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index?error=%D0%9E%D1%88%D0%B8%D0%B1%D0%BA%D0%B0+%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B8+%D1%84%D0%B0%D0%B9%D0%BB%D0%B0"
+2019/07/08 17:11:41 [error] 1011#1011: *214 FastCGI sent in stderr: "PHP message: PHP Warning:  The use statement with non-compound name 'Yii' has no effect in /var/www/task.local/frontend/views/file/fileList.php on line 1" while reading response header from upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /file/index?error=%D0%9E%D1%88%D0%B8%D0%B1%D0%BA%D0%B0+%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B8+%D1%84%D0%B0%D0%B9%D0%BB%D0%B0 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/"
+2019/07/08 17:11:43 [error] 1011#1011: *214 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\BadRequestHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\BadRequestHttpException))
+#4 {main}
+Previous exception:
+yii\web\BadRequestHttpException: Отсутствуют обязательные параметры: deletId in /var/www/task.local/vendor/yiisoft/yii2/web/Controller.php:149
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/InlineAction.php(51): yii\web\Controller->bindActionParams(Obj" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /file/delete/6 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index?error=%D0%9E%D1%88%D0%B8%D0%B1%D0%BA%D0%B0+%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B8+%D1%84%D0%B0%D0%B9%D0%BB%D0%B0"
+2019/07/08 19:51:41 [error] 968#968: *6 FastCGI sent in stderr: "PHP message: PHP Warning:  The use statement with non-compound name 'Yii' has no effect in /var/www/task.local/frontend/views/file/fileList.php on line 1" while reading response header from upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /file/ HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/"
+2019/07/08 20:07:02 [error] 965#965: *14 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/task.local/frontend/controllers/FileController.php on line 118. in /var/www/task.local/vendor/yiisoft/yii2/web/Response.php:366
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Response.php(339): yii\web\Response->sendHeaders()
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(135): yii\web\Response->send()
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/task.local/frontend/controllers/FileController.php on line 118. in /var/www/task.local/vendor/yiisoft/yii2/web/Response.php:366
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Respo" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /file/download/5 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/"
+2019/07/08 20:07:09 [error] 965#965: *14 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/task.local/frontend/controllers/FileController.php on line 118. in /var/www/task.local/vendor/yiisoft/yii2/web/Response.php:366
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Response.php(339): yii\web\Response->sendHeaders()
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(135): yii\web\Response->send()
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/task.local/frontend/controllers/FileController.php on line 118. in /var/www/task.local/vendor/yiisoft/yii2/web/Response.php:366
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Respo" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /file/download/8 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/"
+2019/07/08 20:07:34 [error] 965#965: *14 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/task.local/frontend/controllers/FileController.php on line 118. in /var/www/task.local/vendor/yiisoft/yii2/web/Response.php:366
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Response.php(339): yii\web\Response->sendHeaders()
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(135): yii\web\Response->send()
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/task.local/frontend/controllers/FileController.php on line 118. in /var/www/task.local/vendor/yiisoft/yii2/web/Response.php:366
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Respo" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /file/download/5 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/"
+2019/07/08 20:07:37 [error] 965#965: *14 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/task.local/frontend/controllers/FileController.php on line 118. in /var/www/task.local/vendor/yiisoft/yii2/web/Response.php:366
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Response.php(339): yii\web\Response->sendHeaders()
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(135): yii\web\Response->send()
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/task.local/frontend/controllers/FileController.php on line 118. in /var/www/task.local/vendor/yiisoft/yii2/web/Response.php:366
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Respo" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /file/download/8 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/"

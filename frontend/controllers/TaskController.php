@@ -54,7 +54,7 @@ class TaskController extends Controller
         $model->userId=$user->userId;
         $task=$model->save();
         if(!$task){
-        return $this->redirect( Url::to(['task/index'])."?Ошибка+записи");   
+        return $this->redirect( Url::to(['task/index'])."?error=Ошибка+записи");   
         }
          return $this->redirect( Url::to(['task/index']));
         }
@@ -88,9 +88,9 @@ class TaskController extends Controller
                      $update=$task->update();
                      return $this->redirect( Url::to(['task/index']));
                   }
-                  return $this->redirect( Url::to(['task/index'])."?Некорректные+данные"); 
+                  return $this->redirect( Url::to(['task/index'])."?error=Некорректные+данные"); 
               }
-              return $this->redirect( Url::to(['task/index'])."?Доступ+закрыт");
+              return $this->redirect( Url::to(['task/index'])."?error=Доступ+закрыт");
           }
         }
     }
@@ -107,10 +107,10 @@ class TaskController extends Controller
           }
       $task=Task::findOne(['taskId'=>intval($deleteId),'userId'=>$user->userId]);
       if(!$task){
-        return $this->redirect( Url::to(['task/index'])."?Ошибка+удаления");
+        return $this->redirect( Url::to(['task/index'])."?error=Ошибка+удаления");
       }
       if(!$task->delete()){
-        return $this->redirect( Url::to(['task/index'])."?Ошибка+удаления");    
+        return $this->redirect( Url::to(['task/index'])."?error=Ошибка+удаления");    
       }
       
                      return $this->redirect( Url::to(['task/index']));

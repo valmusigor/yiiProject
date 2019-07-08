@@ -14,7 +14,8 @@ return [
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
-            'csrfParam' => '_csrf-frontend',
+           'csrfParam' => '_csrf-frontend',
+           // 'enableCsrfValidation' => false,
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -47,6 +48,8 @@ return [
                 '/auth'=>'user/auth',
                 '/auth/add'=>'user/add',
                 'task/delete/<deleteId:\d+>' => 'task/delete',
+                'file/delete/<deleteId:\d+>' => 'file/delete',
+                'file/download/<downloadId:\d+>' => 'file/download',
                 [
                 'pattern' => 'task/<sort:(up|down){0,1}>',
                 'route' => 'task/index',
@@ -83,4 +86,8 @@ return [
         
     ],
     'params' => $params,
+    'aliases'=>[
+        '@uploadImages'=>'/var/www/task.local/frontend/web/uploadImages',
+        '@showImages'=>'/uploadImages',
+    ],
 ];

@@ -119,7 +119,7 @@ public function actionAdd(){
        return $this->redirect( Url::to(['user/register']));
     }
         $this->session->set('auth', 'ok');
-        $this->session->set('id', $user->userId);
+        $this->session->set('id', $model->userId);
         return $this->redirect( Url::to(['site/index']));
  }
 }
