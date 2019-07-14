@@ -1,95 +1,81 @@
 <?php
 
 namespace frontend\controllers;
-use frontend\models\User;
+use frontend\models\{RegisterForm, User, LoginForm};
 use yii\web\Controller;
 use yii\helpers\Url;
 use Yii;
 
 class UserController extends Controller{
-    private $session; 
-    public function __construct($id, $module, $config=array()){
-        parent::__construct($id, $module, $config);
-        $this->session = Yii::$app->session;
-    }
-    public function actionAuth(){
-    if($this->session->has('auth') && $this->session->has('id')){
-        $auth=$this->session->get('auth');
-        $id=$this->session->get('id');
-        $user=User::findOne(intval($id));
-        if($auth==='ok' && $user){
-          if($user->role ==='admin'){
-            echo "Hello admin";
-            exit();
-          }
-        return $this->redirect( Url::to(['site/index']));
-        }
-    }
-    $model= new User();
-    $model->scenario=User::SCENARIO_LOGIN;
-    $formData= Yii::$app->request->post();
-    $model->attributes=$formData;
-    if(!$model->validate()){
-      $errors=$model->getErrors();
-      return $this->redirect( Url::to(['user/login']).'?error='.reset($errors)[0]);
-    }
-    $user=User::findOne(['login'=>$model->login,'pass'=>$model->pass]);
-    if(!$user){
-      return $this->redirect( Url::to(['user/login'])."?error=Пользователь+с+такими+данными+не+найден&login={$formData['login']}&pass={$formData['pass']}");   
-    }
-    $this->session->set('auth', 'ok');
-    $this->session->set('id', $user->userId);
-    if($user->role ==='admin') {
-         echo "hello admin";
-         exit();
-    }
-    else
-       return $this->redirect( Url::to(['site/index']));
-  }
+//    private $session; 
+//    public function __construct($id, $module, $config=array()){
+//        parent::__construct($id, $module, $config);
+//        $this->session = Yii::$app->session;
+//    }
+//    public function actionAuth(){
+//    if($this->session->has('auth') && $this->session->has('id')){
+//        $auth=$this->session->get('auth');
+//        $id=$this->session->get('id');
+//        $user=User::findOne(intval($id));
+//        if($auth==='ok' && $user){
+//          if($user->role ==='admin'){
+//            echo "Hello admin";
+//            exit();
+//          }
+//        return $this->redirect( Url::to(['site/index']));
+//        }
+//    }
+//    $model= new User();
+//    $model->scenario=User::SCENARIO_LOGIN;
+//    $formData= Yii::$app->request->post();
+//    $model->attributes=$formData;
+//    if(!$model->validate()){
+//      $errors=$model->getErrors();
+//      return $this->redirect( Url::to(['user/login']).'?error='.reset($errors)[0]);
+//    }
+//    $user=User::findOne(['login'=>$model->login,'pass'=>$model->pass]);
+//    if(!$user){
+//      return $this->redirect( Url::to(['user/login'])."?error=Пользователь+с+такими+данными+не+найден&login={$formData['login']}&pass={$formData['pass']}");   
+//    }
+//    $this->session->set('auth', 'ok');
+//    $this->session->set('id', $user->userId);
+//    if($user->role ==='admin') {
+//         echo "hello admin";
+//         exit();
+//    }
+//    else
+//       return $this->redirect( Url::to(['site/index']));
+//  }
     public function actionLogin(){
-        if($this->session->has('auth') && $this->session->has('id')){
-        $auth=$this->session->get('auth');
-        $id=$this->session->get('id');
-        $user=User::findOne(intval($id));
-        if($auth==='ok' && $user){
-          if($user->role ==='admin'){
-            echo "Hello admin";
-            exit();
-          }
-        return $this->redirect( Url::to(['site/index']));
+        if(!Yii::$app->user->isGuest){
+           return $this->redirect( Url::to(['site/index'])); 
         }
-    }
-        return $this->render('login');
+        $model= new LoginForm();
+        if($model->load(Yii::$app->request->post()) && $model->login()){
+            return $this->redirect( Url::to(['site/index']));
+        }
+        return $this->render('login',['model'=>$model]);
   }
   public function actionLogout(){
-      if($this->session->has('auth') && $this->session->has('id')){
-        $auth=$this->session->get('auth');
-        $id=$this->session->get('id');
-        $user=User::findOne(intval($id));
-        if($auth==='ok' && $user){
-          $this->session->remove('auth');
-          $this->session->remove('id');
-        return $this->redirect( Url::to(['user/login']));
+      if(Yii::$app->user->isGuest){
+           return $this->redirect( Url::to(['user/login'])."?error=Вы+не+авторизованы"); 
         }
-    }
-    return $this->redirect( Url::to(['user/login'])."?error=Вы+не+авторизованы");
+        Yii::$app->user->logout();
+        return $this->redirect( Url::to(['user/login']));
+    
   }
   public function actionRegister(){
-    if($this->session->has('auth') && $this->session->has('id')){
-        $auth=$this->session->get('auth');
-        $id=$this->session->get('id');
-        $user=User::findOne(intval($id));
-        if($auth==='ok' && $user){
-          if($user->role ==='admin'){
-            echo "Hello admin";
-            exit();
-          }
-        return $this->redirect( Url::to(['site/index']));
+    if(!Yii::$app->user->isGuest){
+           return $this->redirect( Url::to(['site/index'])); 
         }
+    $model= new RegisterForm();
+    if($model->load(Yii::$app->request->post()) && $model->save()){
+        
+        return $this->redirect( Url::to(['site/index']));
     }
-    return $this->render('register');
+    return $this->render('register',['model'=>$model]);
 }
-public function actionAdd(){
+/*public function actionAdd(){
     if($this->session->has('auth') && $this->session->has('id')){
         $auth=$this->session->get('auth');
         $id=$this->session->get('id');
@@ -121,6 +107,6 @@ public function actionAdd(){
         $this->session->set('auth', 'ok');
         $this->session->set('id', $model->userId);
         return $this->redirect( Url::to(['site/index']));
- }
+ }*/
 }
 

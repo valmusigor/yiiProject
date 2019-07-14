@@ -1,17 +1,26 @@
-<?php use yii\helpers\Url;?>
-<form action="<?=Url::to(['task/save']);?>" class="addTask">
-  <input type="text" name="task" placeholder="enter task">
-  <select name="hour">
-    <?php for($i=0;$i<24;$i++): ?>
-      <option value=<?=($i<10)?'0'.$i:$i ?>><?=($i<10)?'0'.$i:$i ?></option>
-    <?php endfor;?>
-  </select>
-  <select name="minutes">
-    <? for($i=0;$i<60;$i++): ?>
-      <option value=<?=($i<10)?'0'.$i:$i ?>><?=($i<10)?'0'.$i:$i ?></option>
-    <? endfor;?>
-  </select>
-  <input type="date" name="calendar" value=<?=date("Y-m-d")?> min=<?=date("Y-m-d")?>>
-  <button type="submit">Add task</button>
-</form>
+<?php 
+use yii\helpers\{Url,Html};
+use yii\widgets\ActiveForm;
+use kartik\datetime\DateTimePicker;
+?>
+<?php $form= ActiveForm::begin(['id'=>'addTask']) ?>
+  
+<?=$form->field($model, 'text')->textInput(['placeholder' => 'enter task'])->label('Task');?>
+  
+<?=$form->field($model, 'time_end')->widget(DateTimePicker::className(),[
+    'name' => 'time_end',
+    'type' => DateTimePicker::TYPE_INPUT,
+    'options' => ['placeholder' => 'Select time & date...'],
+    'convertFormat' => true,
+    'value'=> date("d.m.Y h:i",(integer) $model->time_end),
+    'pluginOptions' => [
+        'format' => 'dd.MM.yyyy hh:i',
+        'autoclose'=>true,
+        'weekStart'=>1, //неделя начинается с понедельника
+        'startDate' => '01.05.2015 00:00', //самая ранняя возможная дата
+        'todayBtn'=>true, //снизу кнопка "сегодня"
+    ]
+]);?>
+ <?=Html::submitButton('Add', ['class'=>'btn btn-primary'])?>
+<? ActiveForm::end(); ?>
 

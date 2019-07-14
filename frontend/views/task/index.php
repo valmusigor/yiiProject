@@ -1,11 +1,12 @@
 <?php 
 use yii\helpers\Url;
+use Yii;
 use frontend\assets\CommonAsset;
 CommonAsset::register($this);
-?>
+?>  
     <div style="color:red"><?=$error?></div>
     <div style="display:flex;justify-content:space-between">
-      <?=$this->render('add');?>
+      <?=$this->render('add',['model'=>$model]);?>
       <span>
         <strong style="font-size:30px">
           <span class="logo">

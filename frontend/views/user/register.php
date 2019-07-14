@@ -1,9 +1,24 @@
+<?php
+use yii\widgets\ActiveForm;
+use yii\helpers\Html;
+?>
 <span style="color:red"><?=Yii::$app->request->get('error')?></span>
-      <form action="/auth/add" method="POST">
-        <input type="text" name="login" placeholder="enter login" value="<?=Yii::$app->request->get('login') ?>" />
-        <input type="password" name="pass" placeholder="enter password" value="<?=Yii::$app->request->get('pass') ?>" />
-        <input type="email" name="email" placeholder="enter email" value="<?=Yii::$app->request->get('email') ?>" />
-        <input type="hidden" name="<?=Yii::$app->request->csrfParam; ?>" value="<?=Yii::$app->request->getCsrfToken(); ?>" />
-        <button type="submit">Зарегестрироваться</button>
-      </form> 
+<div class="row">
+    <div class="col-md-5">
+      <?php $form = ActiveForm::begin(['id'=>'register_form','options'=>['method'=>'POST']]);?>
+        <?=$form->field($model, 'username')->textInput(['placeholder' => 'enter login'])->label('Login');?>
+        <?=$form->field($model, 'pass')->passwordInput(['placeholder' => 'enter password'])->label('Password');?>
+        <?=$form->field($model, 'email')->input('email',['placeholder' => 'enter email'])->label('Email');?>
+        <?=$form->field($model, 'role')->dropDownList([
+        '1' => 'Клиент',
+        '2'=>'Нотариус'
+        ],['id' => 'registerRole',
+        'options' => [
+            '1' => ['Selected' => true]
+        ]]);?>
+        <?=Html::submitButton('Signup', ['class'=>'btn btn-primary']);?>
+      <?php ActiveForm::end(); ?> 
+    </div>
+</div>
 <a href="/login">Войти</a>
+       

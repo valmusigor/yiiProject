@@ -14,11 +14,11 @@ return [
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
-           'csrfParam' => '_csrf-frontend',
-           // 'enableCsrfValidation' => false,
+           //'csrfParam' => '_csrf-frontend',
+            'enableCsrfValidation' => false,
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'frontend\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],
@@ -89,5 +89,7 @@ return [
     'aliases'=>[
         '@uploadImages'=>'/var/www/task.local/frontend/web/uploadImages',
         '@showImages'=>'/uploadImages',
+        '@uploadNotary'=>'/var/www/task.local/frontend/web/uploadNotary',
+        '@showNotary'=>'/uploadNotary',
     ],
 ];

@@ -3,43 +3,36 @@
 namespace frontend\controllers;
 
 use yii\web\Controller;
-use frontend\models\{User,Task};
+use frontend\models\{User,Task,TaskForm};
 use yii\helpers\Url;
 use Yii;
 
 class TaskController extends Controller
 {
-    private $session; 
-    public function __construct($id, $module, $config=array()){
-        parent::__construct($id, $module, $config);
-        $this->session = Yii::$app->session;
-    }
     public function actionIndex($sort=null)
     {
-    if($this->session->has('auth') && $this->session->has('id')){
-        $id=$this->session->get('id');
-        $user=User::findOne(intval($id));
-        if($this->session->get('auth')==='ok' && $user){
-          if($user->role ==='admin'){
-            echo "Hello admin";
-            exit();
-          }
-          $tasks=(($sort==='up')?Task::find()->where(['userId'=>$user->userId])->orderBy(['time_end'=>SORT_ASC])->all():
-          Task::find()->where(['userId'=>$user->userId])->orderBy(['time_end'=>SORT_DESC])->all()); 
-        return $this->render('index',['tasks'=>$tasks,'login'=>$user->login,'error'=>Yii::$app->request->get('error')]);
+       
+     if(Yii::$app->user->isGuest){
+          return $this->redirect( Url::to(['user/login'])."?error=Вы+не+авторизованы"); 
         }
-    }
-    return $this->redirect( Url::to(['user/login'])."?error=Вы+не+авторизованы");
+          $user=Yii::$app->user->identity;
+          $model=new TaskForm();
+          if($model->load(Yii::$app->request->post()) && $model->save($user)){
+              //return $this->redirect( Url::to(['task/index'])); 
+              Yii::$app->session->setFlash('success', 'Add task');
+             
+          }
+          $tasks=Task::getTasks($user->id, $sort);
+          return $this->render('index',
+              ['tasks'=>$tasks,
+              'login'=>$user->username,
+              'error'=>Yii::$app->request->get('error'),
+               'model'=>$model]);
     }
     public function actionSave() {
-        if($this->session->has('auth') && $this->session->has('id')){
-        $id=$this->session->get('id');
-        $user=User::findOne(intval($id));
-        if($this->session->get('auth')==='ok' && $user){
-          if($user->role ==='admin'){
-            echo "Hello admin";
-            exit();
-          }
+        if(Yii::$app->user->isGuest){
+          return $this->redirect( Url::to(['user/login'])."?error=Вы+не+авторизованы"); 
+        }
         $formData['text']= Yii::$app->request->get('task');
         $formData['time_end']=strtotime(Yii::$app->request->get('hour')
                  .':'.Yii::$app->request->get('minutes')
@@ -57,9 +50,7 @@ class TaskController extends Controller
         return $this->redirect( Url::to(['task/index'])."?error=Ошибка+записи");   
         }
          return $this->redirect( Url::to(['task/index']));
-        }
-    }
-    return $this->redirect( Url::to(['user/login'])."?error=Вы+не+авторизованы");
+     
     }
     
     public function actionUpdate(){
