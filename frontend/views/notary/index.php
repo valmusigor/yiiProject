@@ -79,8 +79,9 @@ echo GridView::widget(
                  * Задаем выпадающий список с заданными значениями вместо поля для ввода
                  */
                 'filter' => [
-                    0 => 'Принят',
-                    1 => 'В работе',
+                    1 => 'Принят',
+                    2 => 'В работе',
+                    3 => 'Завершен'
                 ],
                 /**
                  * Переопределяем отображение самих данных.
@@ -91,9 +92,9 @@ echo GridView::widget(
                     $status = $model->{$column->attribute};
                     return \yii\helpers\Html::tag(
                         'span',
-                        (($status===0) ? 'Принят' : (($status===1)? 'В работе':'Завершен') ),
+                        (($status===1) ? 'Принят' : (($status===2)? 'В работе':'Завершен') ),
                         [
-                            'class' => 'label label-' . (($status===1) ? 'success' : 'danger'),
+                            'class' => 'label label-' . (($status===3) ? 'success' : 'danger'),
                         ]
                     );
                 },
@@ -108,7 +109,7 @@ echo GridView::widget(
                         ($notary_id!==NULL)?User::findOne(['id'=>$notary_id])->username:'Ожидание исполнителя'
                     );
                 },
-            ],          
+            ],
                         
          
             /**
@@ -122,16 +123,32 @@ echo GridView::widget(
                 /**
                  * Определяем набор кнопочек. По умолчанию {view} {update} {delete}
                  */
-                //'template' => '{update} {delete}',
+                'template' => '{subscribe} {cancel} {update} {delete} {repeat}',
+                 'buttons'=>[
+                     'subscribe' => function ($url,$model,$key) {
+                            return Html::a('Подписать', $url, ['class' => 'btn btn-success btn-xs']);
+                        },         
+                        'cancel' => function ($url,$model,$key) {
+                            return Html::a('Отменить подпись', $url, ['class' => 'btn btn-danger btn-xs']);
+                        },
+                        'repeat' => function ($url,$model,$key) {
+                            return Html::a('Вернутся к подписи', $url, ['class' => 'btn btn-success btn-xs']);
+                        },
+                       
+                 ],
                 'visibleButtons'=>[
-                    'update'=>function ($model, $key, $index) { return $model->status === 0; } ,
-                    'delete'=>function ($model, $key, $index) { return $model->status === 0; } 
-                ]
-            ],
+                    'update'=>function ($model, $key, $index) { return ($model->status === 1 && Yii::$app->user->identity->role===1); } ,
+                    'delete'=>function ($model, $key, $index) { return ($model->status === 1 && Yii::$app->user->identity->role===1); } ,
+                    'subscribe'=>function ($model, $key, $index) { return ($model->status === 1 && Yii::$app->user->identity->role===2);} ,
+                    'cancel'=>function ($model, $key, $index) { return ($model->status === 2 && Yii::$app->user->identity->role===2 && $model->notary_id===Yii::$app->user->identity->id);},
+                    'repeat'=>function ($model, $key, $index) { return ($model->status === 2 && Yii::$app->user->identity->role===2 && $model->notary_id===Yii::$app->user->identity->id);},
+                 ],    
+            ],             
         ],
     ]
 );
 ?>
+<?php if(Yii::$app->user->identity->role===1): ?>
 <div class="row">
     <div class="col-md-5">
   <?php 
@@ -151,4 +168,6 @@ echo GridView::widget(
 </div>
 <? ActiveForm::end(); ?>
  
-    </div></div>
+    </div>
+</div>
+<?php endif; ?>

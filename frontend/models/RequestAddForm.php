@@ -42,7 +42,7 @@ class RequestAddForm extends Model {
             $notary->upload_name=$this->file_name->baseName;
             $notary->time_create_request=time();
             $notary->client_id=Yii::$app->user->identity->id;
-            $notary->status=0;
+            $notary->status=1;
             $notary->save();
             return true;
         }
