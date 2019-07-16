@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use yii\web\Controller;
 use frontend\models\{User,Files};
+use frontend\controllers\behaviors\AccessBehavior;
 use yii\helpers\Url;
 use \yii\web\UploadedFile;
 use Yii;
@@ -13,96 +14,40 @@ use Yii;
  * @author igor
  */
 class FileController extends Controller {
-    private $session; 
-    public function __construct($id, $module, $config=array()){
-        parent::__construct($id, $module, $config);
-        $this->session = Yii::$app->session;
+    public function behaviors() {
+        return [
+        AccessBehavior::className(),
+        ];
     }
     public function actionIndex(){
-        
-    if($this->session->has('auth') && $this->session->has('id')){
-        $id=$this->session->get('id');
-        $user=User::findOne(intval($id));
-        if($this->session->get('auth')==='ok' && $user){
-          if($user->role ==='admin'){
-            echo "Hello admin";
-            exit();
-        }
        $model=new Files();
-       $files=Files::find()->where(['userId'=>$user->userId])->all();
-       return $this->render('index',['model'=>$model,'files'=>$files]);
-      }
-    }
-   return $this->redirect( Url::to(['user/login'])."?error=Вы+не+авторизованы");
-    }   
-    
-   public function actionUpload(){
-   if($this->session->has('auth') && $this->session->has('id')){
-        $id=$this->session->get('id');
-        $user=User::findOne(intval($id));
-        if($this->session->get('auth')==='ok' && $user){
-          if($user->role ==='admin'){
-            echo "Hello admin";
-            exit();
-        }
-        $model=new Files();
-        if(Yii::$app->request->isPost)
+       $files=Files::find()->where(['userId'=>Yii::$app->user->identity->id])->all();
+       if(Yii::$app->request->isPost)
         {
             $model->name= UploadedFile::getInstance($model, 'name');
             if($model->upload()){
-                $model->userId=$user->userId;
-                $model->save();
+                Yii::$app->session->setFlash('success', 'FILE UPLODED');
                 return $this->redirect( Url::to(['file/index']));
             }
         }
-        return $this->redirect( Url::to(['file/index'])."?error=Ошибка+загрузки+файла");
-        }
-    }
-   return $this->redirect( Url::to(['user/login'])."?error=Вы+не+авторизованы");
-   }
+       return $this->render('index',['model'=>$model,'files'=>$files]);
+    }   
+
     public function actionDelete($deleteId){
-      if($this->session->has('auth') && $this->session->has('id')){
-        $id=$this->session->get('id');
-        $user=User::findOne(intval($id));
-        if($this->session->get('auth')==='ok' && $user){
-          if($user->role ==='admin'){
-            echo "Hello admin";
-            exit();
-        }
-       $file=Files::findOne(['fileId'=>intval($deleteId),'userId'=>$user->userId]);
-      if(!$file){
+     
+      if(!($file=Files::getFile(intval($deleteId),Yii::$app->user->identity->id))){
         return $this->redirect( Url::to(['file/index'])."?error=Ошибка+удаления");
       }
-      $path=Yii::getAlias('@uploadImages').'/'.$file->name[0].'/'.$file->name;
-        if(!file_exists($path)){
-            return $this->redirect( Url::to(['file/index'])."?error=Файл+не+существует");
-        }
-        if(!unlink($path)){
-          return $this->redirect( Url::to(['file/index'])."?Ошибка+удаления"); 
-        }
-        else{
-          if(!$file->delete()){
-            return $this->redirect( Url::to(['file/index'])."?Ошибка+удаления");    
-            }
-        }
-        return $this->redirect( Url::to(['file/index']));
-        
+      if(Files::deleteFile($file->name) && $file->delete())
+      {
+          Yii::$app->session->setFlash('success', 'FILE DELETED');
+          return $this->redirect( Url::to(['file/index']));
+      }
+      return $this->redirect( Url::to(['file/index'])."?Ошибка+удаления");    
     }
-    }
-   return $this->redirect( Url::to(['user/login'])."?error=Вы+не+авторизованы");
-        }
      public function actionDownload($downloadId){
-      if($this->session->has('auth') && $this->session->has('id')){
-        $id=$this->session->get('id');
-        $user=User::findOne(intval($id));
-        if($this->session->get('auth')==='ok' && $user){
-          if($user->role ==='admin'){
-            echo "Hello admin";
-            exit();
-        }
-        $file=Files::findOne(['fileId'=>$downloadId, 'userId'=>$user->userId]);
-        if(!$file){
-          header('Location:index.php?error=Файл+не+найден');
+      
+        if(!($file=Files::getFile(intval($downloadId),Yii::$app->user->identity->id))){
           return $this->redirect( Url::to(['file/index'])."?error=Файл+не+найден");
         }
          $path=Yii::getAlias('@uploadImages').'/'.$file->name[0].'/'.$file->name;
@@ -116,11 +61,7 @@ class FileController extends Controller {
           header("Content-Type:".mime_content_type($path).";\r\n");
           header("Content-Disposition: attachment; filename=\"".$file->uploadName."\"\r\n");
           readfile($path);
-   }
-        else return $this->redirect( Url::to(['file/index'])."?error=Ошибка+загрузки+файла");;
-
           }
-    }
-   return $this->redirect( Url::to(['user/login'])."?error=Вы+не+авторизованы");
+        else return $this->redirect( Url::to(['file/index'])."?error=Ошибка+загрузки+файла");
     }
 }

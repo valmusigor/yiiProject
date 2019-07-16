@@ -33,6 +33,9 @@ class Task extends ActiveRecord{
    public static function getTaskByDate($id,$time_end){
        return Task::find()->where(['userId'=>$id,'time_end'=>$time_end])->all();       
    }
+   public static function getTask($id,$userId){
+       return Task::findone(['taskId'=>$id,'userId'=>$userId]);
+   }
 }
 
 

@@ -8,7 +8,6 @@ use yii\widgets\ActiveForm;
     $form= ActiveForm::begin([
         'id'=>'fileUploadForm',
         'method'=>'POST',
-        'action'=>'/file/upload',
         'options'=>['enctype'=>'multipart/form-data'],]); ?>
      <?=$form->field($model, 'name')->fileInput();?>
      <?=Html::submitButton('UPLOAD', ['class'=>'btn btn-primary']); ?>

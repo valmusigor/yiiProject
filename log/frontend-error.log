@@ -2190,3 +2190,43 @@ Stack trace:
 2019/07/15 17:36:23 [error] 983#983: *365 FastCGI sent in stderr: "PHP message: PHP Warning:  The use statement with non-compound name 'Yii' has no effect in /var/www/task.local/frontend/views/notary/subscribe.php on line 6" while reading response header from upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /notary/subscribe?id=5 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/notary/index"
 2019/07/15 18:16:15 [error] 983#983: *508 FastCGI sent in stderr: "PHP message: PHP Warning:  The use statement with non-compound name 'Yii' has no effect in /var/www/task.local/frontend/views/notary/index.php on line 7" while reading response header from upstream, client: 127.0.0.1, server: task.local.frontend, request: "POST /notary/ HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/notary/"
 2019/07/15 18:24:05 [error] 983#983: *622 FastCGI sent in stderr: "PHP message: PHP Warning:  The use statement with non-compound name 'Yii' has no effect in /var/www/task.local/frontend/views/notary/index.php on line 7" while reading response header from upstream, client: 127.0.0.1, server: task.local.frontend, request: "POST /notary/ HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/notary/"
+2019/07/16 08:22:42 [error] 964#964: *7 FastCGI sent in stderr: "PHP message: PHP Warning:  The use statement with non-compound name 'Yii' has no effect in /var/www/task.local/frontend/views/task/index.php on line 3" while reading response header from upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /task HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/"
+2019/07/16 09:32:20 [error] 964#964: *126 FastCGI sent in stderr: "PHP message: PHP Warning:  The use statement with non-compound name 'Yii' has no effect in /var/www/task.local/frontend/views/notary/index.php on line 7" while reading response header from upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /notary/ HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/"
+2019/07/16 09:38:36 [error] 964#964: *139 FastCGI sent in stderr: "PHP message: PHP Warning:  The use statement with non-compound name 'Yii' has no effect in /var/www/task.local/frontend/views/file/fileList.php on line 1" while reading response header from upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /file/ HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/"
+2019/07/16 09:45:25 [error] 964#964: *158 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request: site/error in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('error', Array)
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(108): yii\base\Module->runAction('site/error')
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#4 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request: file/upload in /var/www/task.local/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('upload', Array)
+#1 /var/www/task.local/vendor/yiis" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "POST /file/upload HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/"
+2019/07/16 10:16:25 [error] 964#964: *299 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/task.local/frontend/controllers/FileController.php on line 63. in /var/www/task.local/vendor/yiisoft/yii2/web/Response.php:366
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Response.php(339): yii\web\Response->sendHeaders()
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(135): yii\web\Response->send()
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/task.local/frontend/controllers/FileController.php on line 63. in /var/www/task.local/vendor/yiisoft/yii2/web/Response.php:366
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Respons" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /file/download/34 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"
+2019/07/16 10:17:12 [error] 964#964: *299 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/task.local/frontend/controllers/FileController.php on line 63. in /var/www/task.local/vendor/yiisoft/yii2/web/Response.php:366
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Response.php(339): yii\web\Response->sendHeaders()
+#1 /var/www/task.local/vendor/yiisoft/yii2/web/ErrorHandler.php(135): yii\web\Response->send()
+#2 /var/www/task.local/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/task.local/frontend/controllers/FileController.php on line 63. in /var/www/task.local/vendor/yiisoft/yii2/web/Response.php:366
+Stack trace:
+#0 /var/www/task.local/vendor/yiisoft/yii2/web/Respons" while reading upstream, client: 127.0.0.1, server: task.local.frontend, request: "GET /file/download/34 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "task.local.frontend", referrer: "http://task.local.frontend/file/index"

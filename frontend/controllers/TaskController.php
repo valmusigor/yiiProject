@@ -4,23 +4,23 @@ namespace frontend\controllers;
 
 use yii\web\Controller;
 use frontend\models\{User,Task,TaskForm};
+use frontend\controllers\behaviors\AccessBehavior;
 use yii\helpers\Url;
 use Yii;
 
 class TaskController extends Controller
 {
+    public function behaviors() {
+        return [
+        AccessBehavior::className(),
+        ];
+    }
     public function actionIndex($sort=null)
     {
-       
-     if(Yii::$app->user->isGuest){
-          return $this->redirect( Url::to(['user/login'])."?error=Вы+не+авторизованы"); 
-        }
-          $user=Yii::$app->user->identity;
+        $user=Yii::$app->user->identity;
           $model=new TaskForm();
           if($model->load(Yii::$app->request->post()) && $model->save($user)){
-              //return $this->redirect( Url::to(['task/index'])); 
               Yii::$app->session->setFlash('success', 'Add task');
-             
           }
           $tasks=Task::getTasks($user->id, $sort);
           return $this->render('index',
@@ -29,44 +29,15 @@ class TaskController extends Controller
               'error'=>Yii::$app->request->get('error'),
                'model'=>$model]);
     }
-    public function actionSave() {
-        if(Yii::$app->user->isGuest){
-          return $this->redirect( Url::to(['user/login'])."?error=Вы+не+авторизованы"); 
-        }
-        $formData['text']= Yii::$app->request->get('task');
-        $formData['time_end']=strtotime(Yii::$app->request->get('hour')
-                 .':'.Yii::$app->request->get('minutes')
-                .' '.Yii::$app->request->get('calendar'));
-        $model= new Task();
-        $model->attributes=$formData;
-        if(!$model->validate()){
-          $errors=$model->getErrors();
-          return $this->redirect( Url::to(['task/index']).'?error='.reset($errors)[0]);
-        }
-        $model->time_create=strtotime(date("Y-m-d H:i:s"));
-        $model->userId=$user->userId;
-        $task=$model->save();
-        if(!$task){
-        return $this->redirect( Url::to(['task/index'])."?error=Ошибка+записи");   
-        }
-         return $this->redirect( Url::to(['task/index']));
-     
-    }
-    
     public function actionUpdate(){
-      if($this->session->has('auth') && $this->session->has('id')){
-        $id=$this->session->get('id');
-        $user=User::findOne(intval($id));
-        if($this->session->get('auth')==='ok' && $user){
-          if($user->role ==='admin'){
-            echo "Hello admin";
-            exit();
+          foreach(Yii::$app->request->get() as $key=>$value){
+           if(!($keys=explode("_", $key)) || count($keys)!==2 || !Task::getTask(intval($keys[1]), Yii::$app->user->identity->id)){
+                return $this->redirect( Url::to(['task/index'])."?error=Неверные+данные");    
+           }
+              $results[$keys[1]][$keys[0]]=htmlspecialchars(str_replace('|','',trim($value)));
           }
-          foreach(Yii::$app->request->get() as $key=>$value)
-            $results[explode("_", $key)[1]][explode("_", $key)[0]]=htmlspecialchars(str_replace('|','',trim($value)));
           foreach ($results as $key =>$value){
-              $task=Task::findOne(['taskId'=>intval($key),'userId'=>$user->userId]);
-              if($task){
+              $task=Task::getTask(intval($key),Yii::$app->user->identity->id);
                   if(isset($value['edit']) && isset($value['hour']) && isset($value['minutes']) && isset($value['calendar']))
                   {
                      $formData['text']= $value['edit'];
@@ -76,43 +47,23 @@ class TaskController extends Controller
                        $errors=$task->getErrors();
                        return $this->redirect( Url::to(['task/index']).'?error='.reset($errors)[0]);
                      }
-                     $update=$task->update();
-                     return $this->redirect( Url::to(['task/index']));
+                     $task->update();
                   }
-                  return $this->redirect( Url::to(['task/index'])."?error=Некорректные+данные"); 
-              }
-              return $this->redirect( Url::to(['task/index'])."?error=Доступ+закрыт");
+                  else return $this->redirect( Url::to(['task/index'])."?error=Некорректные+данные"); 
           }
+         return $this->redirect( Url::to(['task/index']));
+
+    }
+      public function actionDelete($deleteId){    
+        if(!($task=Task::getTask($deleteId, Yii::$app->user->identity->id))){
+          return $this->redirect( Url::to(['task/index'])."?error=Ошибка+удаления");
         }
-    }
-    return $this->redirect( Url::to(['user/login'])."?error=Вы+не+авторизованы");
-    }
-      public function actionDelete($deleteId){
-      if($this->session->has('auth') && $this->session->has('id')){
-        $id=$this->session->get('id');
-        $user=User::findOne(intval($id));
-        if($this->session->get('auth')==='ok' && $user){
-          if($user->role ==='admin'){
-            echo "Hello admin";
-            exit();
-          }
-      $task=Task::findOne(['taskId'=>intval($deleteId),'userId'=>$user->userId]);
-      if(!$task){
-        return $this->redirect( Url::to(['task/index'])."?error=Ошибка+удаления");
-      }
-      if(!$task->delete()){
-        return $this->redirect( Url::to(['task/index'])."?error=Ошибка+удаления");    
-      }
-      
-                     return $this->redirect( Url::to(['task/index']));
+        if(!$task->delete()){
+          return $this->redirect( Url::to(['task/index'])."?error=Ошибка+удаления");    
         }
-    }
-    return $this->redirect( Url::to(['user/login'])."?error=Вы+не+авторизованы");
-    }
-    
-    
-    
-    
+        Yii::$app->session->setFlash('success', 'Success delete task');
+        return $this->redirect( Url::to(['task/index']));
+      }
     public function actionMail(){
         $result = Yii::$app->mailer->compose()->setFrom('xraymoby@gmail.com')
         ->setTo('x-ray-moby@mail.ru')->setSubject('Тема сообщения')

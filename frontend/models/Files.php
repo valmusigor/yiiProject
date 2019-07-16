@@ -12,7 +12,7 @@ class Files extends ActiveRecord{
    public function rules() {
      return [
          ['name','required'],
-         ['name', 'file', 'extensions' => ['png', 'jpg', 'gif'], 'maxSize' => 1024*1024*2]
+         ['name', 'file', 'extensions' => ['png', 'jpg', 'gif','jpeg'], 'maxSize' => 1024*1024*2]
      ];
    }
    public  function upload(){
@@ -24,8 +24,20 @@ class Files extends ActiveRecord{
            $this->name->saveAs(Yii::getAlias('@uploadImages').'/'.$fileName[0].'/'.$fileName);
            $this->downloadName= substr($fileName, 0,5).'.'.$this->name->extension;
            $this->name=$fileName;
+           $this->userId=Yii::$app->user->identity->id;
+           if($this->save())
            return true;
        }
        return false;
+   }
+   public static function getFile($id,$userId){
+       return Files::findOne(['fileId'=>$id,'userId'=>$userId]);
+   }
+   public static function deleteFile($file_name){
+       $path=Yii::getAlias('@uploadImages').'/'.$file_name[0].'/'.$file_name;
+        if(file_exists($path) && unlink($path)){
+            return true;
+        }
+        return false;
    }
 }
