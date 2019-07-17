@@ -2,12 +2,14 @@
 
 namespace frontend\controllers;
 use frontend\models\Notary;
+use frontend\models\Messages;
 use frontend\controllers\behaviors\AccessBehavior;
 use \yii\web\Controller;
 use yii\helpers\Url;
 use yii\data\ActiveDataProvider;
 use frontend\models\RequestAddForm;
 use frontend\models\SubscribeForm;
+use frontend\models\MessageForm;
 use \yii\web\UploadedFile;
 use Yii;
 
@@ -45,6 +47,7 @@ class NotaryController extends Controller
         ]);
         if(Yii::$app->user->identity->role===1){
         $model=new RequestAddForm();
+        $modelMessageForm=new MessageForm();
         $model->scenario= RequestAddForm::SCENARIO_SAVE;
         if(Yii::$app->request->isPost)
         { 
@@ -54,9 +57,9 @@ class NotaryController extends Controller
                 Yii::$app->session->setFlash('success', 'REQUEST ADDED');
             }
         }
-        return $this->render('index',['dataProvider'=>$dataProvider,'model'=>$model]);
+        return $this->render('index',['dataProvider'=>$dataProvider,'model'=>$model,'modelMessageForm'=>$modelMessageForm]);
         }
-         return $this->render('index',['dataProvider'=>$dataProvider]);
+         return $this->render('index',['dataProvider'=>$dataProviderl,'modelMessageForm'=>$modelMessageForm]);
     }
 
     public function actionUpdate($id)
@@ -117,6 +120,47 @@ class NotaryController extends Controller
     public function actionRepeat($id)
     {    
         return $this->redirect( Url::to(['notary/subscribe']).'?id='.$id);  
+    }
+    public function actionMessage($id){
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $notary = Notary::getNotary($id);
+        if(!$notary) return json_encode (FALSE);
+        if($notary->status===2 || $notary->status===3){
+            if($notary->client_id!==Yii::$app->user->identity->id && $notary->client_id!==Yii::$app->user->identity->id)
+            return json_encode (FALSE);  
+        }
+        $messages= Messages::getMessagesByNotary($id);
+        foreach ($messages as $message){
+            $result[]=[
+                'text_message'=>$message->text_message,
+                'time_create'=>$message->time_create,
+                'sender'=> \frontend\models\User::getUsernameById($message->sender_id),
+            ];
+        }
+        if($messages){
+            
+            return json_encode($result); 
+        }
+        else json_encode (FALSE);
+    }
+    public function actionSendmessage($notary_request_id,$text_message){
+         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        if(!$text_message) return json_encode (FALSE);
+        $notary = Notary::getNotary($notary_request_id);
+        if(!$notary) return json_encode (FALSE);
+        if($notary->status===2 || $notary->status===3){
+            if($notary->client_id!==Yii::$app->user->identity->id && $notary->client_id!==Yii::$app->user->identity->id)
+            return json_encode (FALSE);  
+        }
+        $message = new Messages();
+        $message->text_message=$text_message;
+        $message->time_create= time();
+        $message->sender_id=Yii::$app->user->identity->id;
+        $message->notary_request_id=$notary_request_id;
+        if($message->save())
+        return json_encode (TRUE); 
+           return json_encode (FALSE); 
     }
 
 }

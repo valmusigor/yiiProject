@@ -71,4 +71,7 @@ class Notary extends \yii\db\ActiveRecord
    public static function getNotaryId($id){
        return self::findOne(['id'=>$id])->notary_id;
    }
+   public static function getNotary($id){
+        return self::findOne(['id'=>$id]);
+   }
 }

@@ -6,6 +6,8 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use Yii;
 use frontend\models\User;
+use frontend\assets\CommonAsset;
+CommonAsset::register($this);
 echo GridView::widget(
     [
         /**
@@ -123,7 +125,7 @@ echo GridView::widget(
                 /**
                  * Определяем набор кнопочек. По умолчанию {view} {update} {delete}
                  */
-                'template' => '{subscribe} {cancel} {update} {delete} {repeat}',
+                'template' => '{subscribe} {cancel} {update} {delete} {repeat} {message}',
                  'buttons'=>[
                      'subscribe' => function ($url,$model,$key) {
                             return Html::a('Подписать', $url, ['class' => 'btn btn-success btn-xs']);
@@ -134,6 +136,9 @@ echo GridView::widget(
                         'repeat' => function ($url,$model,$key) {
                             return Html::a('Вернутся к подписи', $url, ['class' => 'btn btn-success btn-xs']);
                         },
+                        'message' => function ($url,$model,$key) {
+                            return Html::a(Html::tag('i','',['class' => 'far fa-comment-dots fa-lg']), $url, ['class' => 'btn btn-primary btn-xs','class'=>'openMessage']);
+                        },
                        
                  ],
                 'visibleButtons'=>[
@@ -142,7 +147,8 @@ echo GridView::widget(
                     'subscribe'=>function ($model, $key, $index) { return ($model->status === 1 && Yii::$app->user->identity->role===2);} ,
                     'cancel'=>function ($model, $key, $index) { return ($model->status === 2 && Yii::$app->user->identity->role===2 && $model->notary_id===Yii::$app->user->identity->id);},
                     'repeat'=>function ($model, $key, $index) { return ($model->status === 2 && Yii::$app->user->identity->role===2 && $model->notary_id===Yii::$app->user->identity->id);},
-                 ],    
+                    'message'=>'true',
+                ],    
             ],             
         ],
     ]
@@ -169,5 +175,20 @@ echo GridView::widget(
 <? ActiveForm::end(); ?>
  
     </div>
+    <div class="col-md-5">
+        <h2>Чат</h2>
+        <div id="messageDesk">
+        
+        </div>
+       
+         <?php $form_message= ActiveForm::begin([ 'id'=>'addMessage',]); ?>
+         <?=$form_message->field($modelMessageForm, 'text_message')->textInput(['placeholder' => 'введите текст сообщения','id'=>'messageInput']);?>
+         <?= $form->field($modelMessageForm, 'notary_request_id')->hiddenInput(['id'=>'notary_request_id'])->label(false);?>
+         <?=Html::button('Отправить', ['class'=>'btn btn-primary','id'=>'sendMessage'])?>
+        <?php ActiveForm::end(); ?>
+    </div>
 </div>
 <?php endif; ?>
+<?php
+$this->registerJsFile('/js/message.js');
+?>

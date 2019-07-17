@@ -91,6 +91,9 @@ class User extends ActiveRecord implements IdentityInterface{
     {
         return $this->authKey === $authKey;
     }
+    public static function getUsernameById($id){
+        return self::findOne($id)->username;
+    }
 }
 
 
