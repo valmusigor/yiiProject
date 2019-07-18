@@ -137,7 +137,7 @@ echo GridView::widget(
                             return Html::a('Вернутся к подписи', $url, ['class' => 'btn btn-success btn-xs']);
                         },
                         'message' => function ($url,$model,$key) {
-                            return Html::a(Html::tag('i','',['class' => 'far fa-comment-dots fa-lg']), $url, ['class' => 'btn btn-primary btn-xs','class'=>'openMessage']);
+                            return Html::a(Html::tag('i','',['class' => 'far fa-comment-dots fa-lg messageIcon']), $url, ['class' => 'btn btn-primary btn-xs','class'=>'openMessage']);
                         },
                        
                  ],
@@ -154,9 +154,10 @@ echo GridView::widget(
     ]
 );
 ?>
-<?php if(Yii::$app->user->identity->role===1): ?>
+
 <div class="row">
     <div class="col-md-5">
+        <?php if(Yii::$app->user->identity->role===1): ?>
   <?php 
     $form= ActiveForm::begin([
         'id'=>'addRequest',
@@ -173,22 +174,22 @@ echo GridView::widget(
     </div>
 </div>
 <? ActiveForm::end(); ?>
- 
+ <?php endif; ?>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-5" id="chat-form">
         <h2>Чат</h2>
-        <div id="messageDesk">
+        <div id="messageDesk"  data-spy="scroll"  data-offset="0">
         
         </div>
        
          <?php $form_message= ActiveForm::begin([ 'id'=>'addMessage',]); ?>
          <?=$form_message->field($modelMessageForm, 'text_message')->textInput(['placeholder' => 'введите текст сообщения','id'=>'messageInput']);?>
-         <?= $form->field($modelMessageForm, 'notary_request_id')->hiddenInput(['id'=>'notary_request_id'])->label(false);?>
+         <?= $form_message->field($modelMessageForm, 'notary_request_id')->hiddenInput(['id'=>'notary_request_id'])->label(false);?>
          <?=Html::button('Отправить', ['class'=>'btn btn-primary','id'=>'sendMessage'])?>
         <?php ActiveForm::end(); ?>
     </div>
 </div>
-<?php endif; ?>
+
 <?php
 $this->registerJsFile('/js/message.js');
 ?>

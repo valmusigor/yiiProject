@@ -37,6 +37,7 @@ class NotaryController extends Controller
 
     public function actionIndex()
     {
+        $modelMessageForm=new MessageForm();
         $dataProvider = new ActiveDataProvider([
             'query' => ((Yii::$app->user->identity->role===1)?
             Notary::find()->where(['client_id'=>Yii::$app->user->identity->id])
@@ -47,7 +48,6 @@ class NotaryController extends Controller
         ]);
         if(Yii::$app->user->identity->role===1){
         $model=new RequestAddForm();
-        $modelMessageForm=new MessageForm();
         $model->scenario= RequestAddForm::SCENARIO_SAVE;
         if(Yii::$app->request->isPost)
         { 
@@ -59,18 +59,20 @@ class NotaryController extends Controller
         }
         return $this->render('index',['dataProvider'=>$dataProvider,'model'=>$model,'modelMessageForm'=>$modelMessageForm]);
         }
-         return $this->render('index',['dataProvider'=>$dataProviderl,'modelMessageForm'=>$modelMessageForm]);
+         return $this->render('index',['dataProvider'=>$dataProvider,'modelMessageForm'=>$modelMessageForm]);
     }
 
     public function actionUpdate($id)
     {
+       
        if(Yii::$app->user->identity->role===1){ 
         $dataProvider = new ActiveDataProvider([
-            'query' => Notary::find(['client_id'=>Yii::$app->user->identity->id]),
+            'query' => Notary::find()->where(['client_id'=>Yii::$app->user->identity->id]),
             'pagination' => [
                 'pageSize' => 20,
             ],
         ]);
+         $modelMessageForm=new MessageForm();
         $model= Notary::findOne(['id'=>intval($id),'client_id'=>Yii::$app->user->identity->id]);
         $updateModel=new RequestAddForm();
         $updateModel->scenario= RequestAddForm::SCENARIO_UPDATE;
@@ -81,7 +83,7 @@ class NotaryController extends Controller
                 Yii::$app->session->setFlash('success', 'REQUEST UPDATE');
             }
           }
-         return $this->render('index',['dataProvider'=>$dataProvider,'model'=>$model]);
+         return $this->render('index',['dataProvider'=>$dataProvider,'model'=>$model,'modelMessageForm'=>$modelMessageForm]);
        }
        return $this->redirect( Url::to(['notary/index']));
     }
@@ -126,8 +128,8 @@ class NotaryController extends Controller
         $notary = Notary::getNotary($id);
         if(!$notary) return json_encode (FALSE);
         if($notary->status===2 || $notary->status===3){
-            if($notary->client_id!==Yii::$app->user->identity->id && $notary->client_id!==Yii::$app->user->identity->id)
-            return json_encode (FALSE);  
+            if($notary->client_id!==Yii::$app->user->identity->id && $notary->notary_id!==Yii::$app->user->identity->id)
+            return json_encode (false);  
         }
         $messages= Messages::getMessagesByNotary($id);
         foreach ($messages as $message){
@@ -150,7 +152,7 @@ class NotaryController extends Controller
         $notary = Notary::getNotary($notary_request_id);
         if(!$notary) return json_encode (FALSE);
         if($notary->status===2 || $notary->status===3){
-            if($notary->client_id!==Yii::$app->user->identity->id && $notary->client_id!==Yii::$app->user->identity->id)
+            if($notary->client_id!==Yii::$app->user->identity->id && $notary->notary_id!==Yii::$app->user->identity->id)
             return json_encode (FALSE);  
         }
         $message = new Messages();

@@ -23,3 +23,10 @@ background: red;
     text-decoration: none;
     color:black;
 }
+#chat-form{
+    display: none;
+}
+#messageDesk{
+    height: 300px;
+    overflow-y: scroll;
+}
