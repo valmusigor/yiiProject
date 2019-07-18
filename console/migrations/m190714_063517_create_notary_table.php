@@ -18,7 +18,7 @@ class m190714_063517_create_notary_table extends Migration
             'document_name'=> $this->string(40),
             'country'=> $this->string(30), 
             'file_name'=> $this->string(50)->unique(),
-            'upload_name'=> $this->string(50),
+            'upload_name'=> $this->string(100),
             'time_create_request'=> $this->integer()->unsigned(),
             'client_id'=> $this->integer()->unsigned(),
             'notary_id'=> $this->integer()->unsigned(),

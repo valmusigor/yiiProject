@@ -13,11 +13,23 @@ window.onload = () =>{
         chatForm.style.display='block';  
         messageIcon[i].classList.remove('fa-comment-dots');
         messageIcon[i].classList.add('fa-window-close');
+        
+      for(let j=0;j<openMessage.length;j++)
+        {
+          if(i===j) continue;
+          openMessage[j].style.display="none";
+        }
+        
       }
       else {
           chatForm.style.display='none';  
           messageIcon[i].classList.remove('fa-window-close');
           messageIcon[i].classList.add('fa-comment-dots');
+          for(let j=0;j<openMessage.length;j++)
+        {
+          if(i===j) continue;
+          openMessage[j].style.display="inline";
+        }
       }
       getMessages(this.href);
       
