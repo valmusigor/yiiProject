@@ -8,20 +8,7 @@ use Yii;
 use frontend\models\User;
 use frontend\assets\CommonAsset;
 CommonAsset::register($this);
-echo GridView::widget(
-    [
-        /**
-         * Экземпляр класса, который реализует \yii\data\DataProviderInterface. В нашем случае ActiveDataProvider
-         */
-        'dataProvider' => $dataProvider,
-        /**
-         * Модель которая используется для фильтрации. Она нужна для отображения input-ов поиска в шапке таблицы
-         */
-//        'filterModel' => new \app\models\Page(),
-        /**
-         * Список колонок которые необходимо отобразить
-         */
-        'columns' => [
+$columns=[
             /**
              * Столбец нумерации. Отображает порядковый номер строки
              */
@@ -114,7 +101,11 @@ echo GridView::widget(
             ],
                         
          
-            /**
+                         
+        ];
+                 for($i=3;$i<count($form_field);$i++)
+                $columns[]=$form_field[$i]->field_name;
+$columns[]=/**
              * Колонка кнопок действий
              */
             [
@@ -149,8 +140,21 @@ echo GridView::widget(
                     'repeat'=>function ($model, $key, $index) { return ($model->status === 2 && Yii::$app->user->identity->role===2 && $model->notary_id===Yii::$app->user->identity->id);},
                     'message'=>'true',
                 ],    
-            ],             
-        ],
+            ];
+echo GridView::widget(
+    [
+        /**
+         * Экземпляр класса, который реализует \yii\data\DataProviderInterface. В нашем случае ActiveDataProvider
+         */
+        'dataProvider' => $dataProvider,
+        /**
+         * Модель которая используется для фильтрации. Она нужна для отображения input-ов поиска в шапке таблицы
+         */
+//        'filterModel' => new \app\models\Page(),
+        /**
+         * Список колонок которые необходимо отобразить
+         */
+        'columns' => $columns,
     ]
 );
 ?>
@@ -161,12 +165,10 @@ echo GridView::widget(
   <?php 
     $form= ActiveForm::begin([
         'id'=>'addRequest',
-      //  'method'=>'POST',
         'options'=>['enctype'=>'multipart/form-data'],]); ?>
-  
-<?=$form->field($model, 'document_name')->textInput(['placeholder' => 'enter document name'])->label('Document name');?>
-<?=$form->field($model, 'country')->textInput(['placeholder' => 'enter country'])->label('Country');?>
-<?=$form->field($model, 'file_name')->fileInput();?>  
+  <?php foreach($form_field as $field): ?>
+  <?= call_user_func_array(array($form->field($model, $field->field_name),$field->type_field),array());?>
+<?php endforeach;?>
 <div class="row">
     <div class="col-md-6">
  <?=Html::submitButton('Добавить', ['class'=>'btn btn-primary'])?>
@@ -193,3 +195,10 @@ echo GridView::widget(
 <?php
 $this->registerJsFile('/js/message.js');
 ?>
+
+
+<?php /*=$form->field($model, 'document_name')->textInput(['placeholder' => 'enter document name'])->label('Document name');?>
+<?=$form->field($model, 'country')->textInput(['placeholder' => 'enter country'])->label('Country');?>
+<?=$form->field($model, 'file_name')->fileInput();?>  
+
+<?=$form->field($model, "name[$key]")->textInput()->label("$key");*/ ?>

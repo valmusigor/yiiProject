@@ -3,6 +3,7 @@
 namespace frontend\models;
 use yii\base\Model;
 use frontend\models\Notary;
+use frontend\models\Forms;
 use Yii;
 /**
  * Description of RequestAddForm
@@ -15,10 +16,28 @@ class RequestAddForm extends Model {
     public  $document_name;
     public $country;
     public $file_name;
-     public function scenarios() {
+    public $name;
+    public function __construct($config = array()) {
+        parent::__construct($config);
+        $form_name=explode('\\',strtolower(RequestAddForm::class));
+        $fields_form= Forms::find()->where(['form_name'=> $form_name[count($form_name)-1]])->all();
+        foreach ($fields_form as $field)
+        $this->name[$field->field_name]='';
+//        'id' => $this->primaryKey(),
+//            'form_name'=> $this->string(100)->notNull(),
+//            'field_name'=> $this->string(100)->notNull(),
+//            'type_field'=> $this->smallInteger()->unsigned()->notNull(),
+//            'required'=>$this->tinyInteger()->unsigned(),
+//            'uniquie'=>$this->tinyInteger()->unsigned(),
+//            'type_value'=> $this->smallInteger()->unsigned(),
+//            'size'=> $this->integer()->unsigned(),
+//            'for_table'=>$this->string(100)->notNull(),
+    }
+
+    public function scenarios() {
         return [
-            self::SCENARIO_SAVE => ['document_name', 'country', 'file_name'],
-            self::SCENARIO_UPDATE => ['document_name', 'country', 'file_name'],
+            self::SCENARIO_SAVE => ['document_name', 'country', 'file_name','name'],
+            self::SCENARIO_UPDATE => ['document_name', 'country', 'file_name','name'],
         ];
     }
     public function rules()
@@ -30,11 +49,16 @@ class RequestAddForm extends Model {
          [['document_name','country'],'required'],
          [['file_name'],'required','on' => self::SCENARIO_SAVE],   
          ['file_name', 'file', 'extensions' => ['pdf'], 'maxSize' => 1024*1024*2],
+       //  ['name', 'each', 'rule' => ['required'],'message' => 'Please choose a username.'],
+            ['name','validateName'],
         ];
     }
     public function save(){
         if($this->validate())
         {
+            echo"<pre>";
+            print_r($this);
+            exit();
             $notary=new Notary();
             $notary->document_name= $this->document_name;
             $notary->country= $this->country;
@@ -72,4 +96,15 @@ class RequestAddForm extends Model {
            $this->file_name->saveAs(Yii::getAlias('@uploadNotary').'/'.$file_name[0].'/'.$file_name);
            return $file_name;
    }
+   public function validateName($attribute,$params){
+        $form_name=explode('\\',strtolower(RequestAddForm::class));
+        $fields_form= Forms::find()->where(['form_name'=> $form_name[count($form_name)-1]])->all();
+        foreach ($fields_form as $field)
+            if($field->required===1 && strlen($this->name[$field->field_name])===0)
+            {
+                $this->addError($attribute, 'Введите значения в поле '.$field->field_name);
+                return false;
+            }
+       return true;
+    }
 }

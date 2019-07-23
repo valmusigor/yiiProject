@@ -47,7 +47,12 @@ AppAsset::register($this);
     } else {
         if (Yii::$app->user->identity->role===1){
         $menuItems[] =['label' => 'Task', 'url' => ['/task/index']];
-        }       
+        } 
+        else if(Yii::$app->user->identity->role===3){
+        $menuItems[] =['label' => 'Админка', 'url' => ['/admin']];
+        $menuItems[] =['label' => 'Редактор форм', 'url' => ['/admin/forms']];
+        
+        } 
         $menuItems[] = '<li>'
             . Html::beginForm(['/user/logout'], 'post')
             . Html::submitButton(

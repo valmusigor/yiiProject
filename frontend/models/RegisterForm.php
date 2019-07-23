@@ -19,6 +19,7 @@ class RegisterForm extends Model{
          [['username','pass'],'string','min'=>4,'max'=>10],
          [['email'],'email'],
          [['email','username'], 'unique','targetClass' => User::className()],
+         
      ];
  }
  public function save() {

@@ -7,9 +7,10 @@ use frontend\controllers\behaviors\AccessBehavior;
 use \yii\web\Controller;
 use yii\helpers\Url;
 use yii\data\ActiveDataProvider;
-use frontend\models\RequestAddForm;
+//use frontend\models\RequestAddForm;
 use frontend\models\SubscribeForm;
 use frontend\models\MessageForm;
+use frontend\models\Forms;
 use \yii\web\UploadedFile;
 use Yii;
 
@@ -25,7 +26,9 @@ class NotaryController extends Controller
         if(Yii::$app->user->identity->role===1){
         $notary= Notary::findOne(['id'=>intval($id),'client_id'=>Yii::$app->user->identity->id]);
         if($notary && $notary->status===1){
-        Notary::deleteFile($notary->file_name);
+        $file_fields= Forms::find()->andwhere(['form_name'=>'requestaddform'])->andWhere(['type_field'=>'fileInput'])->all();
+        foreach ($file_fields as $file_field)
+        Notary::deleteFile($notary->{"$file_field->field_name"});
         if($notary->delete()){
             Yii::$app->session->setFlash('success', 'Заявка успешно удалена');
         }
@@ -47,17 +50,30 @@ class NotaryController extends Controller
             ],
         ]);
         if(Yii::$app->user->identity->role===1){
-        $model=new RequestAddForm();
-        $model->scenario= RequestAddForm::SCENARIO_SAVE;
+        $model=new Notary();
+        $form_field= Forms::find()->where(['form_name'=>'requestaddform'])->all();
+       
+        //$model->scenario= RequestAddForm::SCENARIO_SAVE;
         if(Yii::$app->request->isPost)
         { 
-            $model->attributes=Yii::$app->request->post('RequestAddForm');
-            $model->file_name= UploadedFile::getInstance($model, 'file_name');
-            if($model->save()){
+              $model->attributes=Yii::$app->request->post('Notary');
+              $model->time_create_request=time();
+              $model->client_id=Yii::$app->user->identity->id;
+              $model->status=1;
+              $file_fields= Forms::find()->andwhere(['form_name'=>'requestaddform'])->andWhere(['type_field'=>'fileInput'])->all();
+              $count=0;
+              foreach ($file_fields as $file_field){
+               $file_obj=UploadedFile::getInstance($model, $file_field->field_name); 
+                       if($count===0)
+                       $model->upload_name=$file_obj->baseName;
+                       $count++;
+                       $model->{"$file_field->field_name"}= $model->upload($file_obj); 
+              }
+              if($model->save()){
                 Yii::$app->session->setFlash('success', 'REQUEST ADDED');
-            }
+            }  
         }
-        return $this->render('index',['dataProvider'=>$dataProvider,'model'=>$model,'modelMessageForm'=>$modelMessageForm]);
+        return $this->render('index',['dataProvider'=>$dataProvider,'model'=>$model,'modelMessageForm'=>$modelMessageForm,'form_field'=>$form_field]);
         }
          return $this->render('index',['dataProvider'=>$dataProvider,'modelMessageForm'=>$modelMessageForm]);
     }
@@ -74,16 +90,24 @@ class NotaryController extends Controller
         ]);
          $modelMessageForm=new MessageForm();
         $model= Notary::findOne(['id'=>intval($id),'client_id'=>Yii::$app->user->identity->id]);
-        $updateModel=new RequestAddForm();
-        $updateModel->scenario= RequestAddForm::SCENARIO_UPDATE;
+          $form_field= Forms::find()->where(['form_name'=>'requestaddform'])->all();
+//        $updateModel=new RequestAddForm();
+//        $updateModel->scenario= RequestAddForm::SCENARIO_UPDATE;
           if($model && $model->status===1 && Yii::$app->request->isPost){
-            $updateModel->attributes=Yii::$app->request->post('Notary');
-            $updateModel->file_name= UploadedFile::getInstance($model, 'file_name');
-            if($updateModel->update($model)){
+            $model->attributes=Yii::$app->request->post('Notary');
+            
+              $file_fields= Forms::find()->andwhere(['form_name'=>'requestaddform'])->andWhere(['type_field'=>'fileInput'])->all();
+              foreach ($file_fields as $file_field){
+                       $file_obj=UploadedFile::getInstance($model, $file_field->field_name); 
+                       $model->upload_name=$file_obj->baseName;
+                       $model->{"$file_field->field_name"}= $model->upload($file_obj); 
+              }
+           
+            if($model->save()){
                 Yii::$app->session->setFlash('success', 'REQUEST UPDATE');
             }
           }
-         return $this->render('index',['dataProvider'=>$dataProvider,'model'=>$model,'modelMessageForm'=>$modelMessageForm]);
+         return $this->render('index',['dataProvider'=>$dataProvider,'model'=>$model,'modelMessageForm'=>$modelMessageForm,'form_field'=>$form_field]);
        }
        return $this->redirect( Url::to(['notary/index']));
     }
