@@ -36,6 +36,9 @@ class Forms extends \yii\db\ActiveRecord
             [['required', 'uniquie', 'size', 'file_size'], 'integer'],
             [['form_name', 'field_name', 'type_field', 'type_value', 'for_table'], 'string', 'max' => 100],
             [['extensions'], 'string', 'max' => 45],
+            [['form_name', 'field_name', 'type_field', 'type_value', 'for_table'], 'match', 'pattern' => '/^[0-9a-zA-Z_\-\s]+$/i',
+                'message'=>'Некорректный ввод'],
+            ['field_name','checkExist'],
         ];
     }
 
@@ -57,5 +60,14 @@ class Forms extends \yii\db\ActiveRecord
             'extensions'=>'Расширение',
             'file_size' => 'Размер файла',
         ];
+    }
+    public function checkExist($attribute,$params){
+       $field= self::find()->andWhere(['field_name'=>$this->field_name])->andWhere(['form_name'=>$this->form_name])->all();
+       if($field)
+       {
+           $this->addError($attribute, 'Поле существует');
+           return false;
+       }
+       return true;
     }
 }

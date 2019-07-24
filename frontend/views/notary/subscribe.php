@@ -1,10 +1,6 @@
 <?php
-
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
-use yii\helpers\Url;
-use Yii;
-use frontend\models\User;
 ?>
 <div class="row">
     <div class="col-md-5">

@@ -87,9 +87,9 @@ return [
     ],
     'params' => $params,
     'aliases'=>[
-        '@uploadImages'=>'/var/www/task.local/frontend/web/uploadImages',
+        '@uploadImages'=>__DIR__.'/..'.'/web/uploadImages',
         '@showImages'=>'/uploadImages',
-        '@uploadNotary'=>'/var/www/task.local/frontend/web/uploadNotary',
+        '@uploadNotary'=>__DIR__.'/..'.'/web/uploadNotary',
         '@showNotary'=>'/uploadNotary',
     ],
 ];

@@ -1,6 +1,5 @@
 <?php 
 use yii\helpers\Url;
-use Yii;
 use frontend\assets\CommonAsset;
 CommonAsset::register($this);
 ?>  

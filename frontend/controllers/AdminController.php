@@ -55,7 +55,7 @@ class AdminController extends \yii\web\Controller
         {
         $name_tables[$value['for_table']]=$value['for_table'];
         }
-        if ($model->load(Yii::$app->request->post()) )
+        if ($model->load(Yii::$app->request->post()) &&  $model->validate())
         {
             if($model->type_value==='varchar' && (intval($model->size)>255 || $model->size===''))
               $model->size=255;
@@ -97,7 +97,7 @@ class AdminController extends \yii\web\Controller
         {
         $name_tables[$value['for_table']]=$value['for_table'];
         }
-        if ($model->load(Yii::$app->request->post())){
+        if ($model->load(Yii::$app->request->post()) &&  $model->validate()){
             $old_model=$this->findModel($id);
             Yii::$app->db->createCommand()->dropColumn($old_model->for_table,$old_model->field_name)->execute();
             if($model->type_value==='varchar' && (intval($model->size)>255 || $model->size===''))

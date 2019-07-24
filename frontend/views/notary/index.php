@@ -4,7 +4,7 @@ use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use Yii;
+
 use frontend\models\User;
 use frontend\assets\CommonAsset;
 CommonAsset::register($this);

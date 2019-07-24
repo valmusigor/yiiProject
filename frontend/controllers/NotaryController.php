@@ -7,7 +7,6 @@ use frontend\controllers\behaviors\AccessBehavior;
 use \yii\web\Controller;
 use yii\helpers\Url;
 use yii\data\ActiveDataProvider;
-//use frontend\models\RequestAddForm;
 use frontend\models\SubscribeForm;
 use frontend\models\MessageForm;
 use frontend\models\Forms;
@@ -49,11 +48,9 @@ class NotaryController extends Controller
                 'pageSize' => 20,
             ],
         ]);
+        $form_field= Forms::find()->where(['form_name'=>'requestaddform'])->all();
         if(Yii::$app->user->identity->role===1){
         $model=new Notary();
-        $form_field= Forms::find()->where(['form_name'=>'requestaddform'])->all();
-       
-        //$model->scenario= RequestAddForm::SCENARIO_SAVE;
         if(Yii::$app->request->isPost)
         { 
               $model->attributes=Yii::$app->request->post('Notary');
@@ -75,7 +72,7 @@ class NotaryController extends Controller
         }
         return $this->render('index',['dataProvider'=>$dataProvider,'model'=>$model,'modelMessageForm'=>$modelMessageForm,'form_field'=>$form_field]);
         }
-         return $this->render('index',['dataProvider'=>$dataProvider,'modelMessageForm'=>$modelMessageForm]);
+         return $this->render('index',['dataProvider'=>$dataProvider,'modelMessageForm'=>$modelMessageForm,'form_field'=>$form_field]);
     }
 
     public function actionUpdate($id)
