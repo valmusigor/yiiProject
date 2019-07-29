@@ -16,7 +16,7 @@ class UserController extends Controller{
         $model= new LoginForm();
         if($model->load(Yii::$app->request->post()) && $model->login()){
             if(Yii::$app->user->identity->role===3)
-                 return $this->redirect( Url::to(['/admin']));
+                 return $this->redirect( Url::to(['site/index']));
             return $this->redirect( Url::to(['site/index']));
         }
         return $this->render('login',['model'=>$model]);
@@ -32,7 +32,7 @@ class UserController extends Controller{
   public function actionRegister(){
     if(!Yii::$app->user->isGuest){
         if(Yii::$app->user->identity->role===3)
-                 return $this->redirect( Url::to(['/admin']));
+                 return $this->redirect( Url::to(['site/index']));
            return $this->redirect( Url::to(['site/index'])); 
         }
     $model= new RegisterForm();
@@ -46,7 +46,8 @@ class UserController extends Controller{
         if(Yii::$app->user->identity->role!==3){
            return $this->redirect( Url::to(['site/index'])); 
         }
-        return $this->render('admin');
+        //return $this->render('admin');
+         return $this->redirect( Url::to(['site/index']));
     }
 }
 

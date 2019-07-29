@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Forms', ['admin/formscreate'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Forms', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
 
@@ -96,17 +96,17 @@ $this->params['breadcrumbs'][] = $this->title;
             //'for_table',
 
             ['class' => 'yii\grid\ActionColumn',
-             'buttons' => [
-             'view' => function ($url, $model, $key) {
-                 return Html::a('', ['/admin/formsview', 'id' => $key] ,['class' => 'glyphicon glyphicon-eye-open']);
-              },
-             'delete' => function ($url, $model, $key) {
-                 return Html::a('', ['/admin/formsdelete', 'id' => $key] ,['class' => 'glyphicon glyphicon-trash']);
-              },   
-              'update' => function ($url, $model, $key) {
-                 return Html::a('', ['/admin/formsupdate', 'id' => $key] ,['class' => 'glyphicon glyphicon-pencil']);
-              }, 
-            ],
+//             'buttons' => [
+//             'view' => function ($url, $model, $key) {
+//                 return Html::a('', ['/admin/formsview', 'id' => $key] ,['class' => 'glyphicon glyphicon-eye-open']);
+//              },
+//             'delete' => function ($url, $model, $key) {
+//                 return Html::a('', ['/admin/formsdelete', 'id' => $key] ,['class' => 'glyphicon glyphicon-trash']);
+//              },   
+//              'update' => function ($url, $model, $key) {
+//                 return Html::a('', ['/admin/formsupdate', 'id' => $key] ,['class' => 'glyphicon glyphicon-pencil']);
+//              }, 
+//            ],
             ],
         ],
     ]); ?>

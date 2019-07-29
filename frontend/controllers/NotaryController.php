@@ -9,7 +9,7 @@ use yii\helpers\Url;
 use yii\data\ActiveDataProvider;
 use frontend\models\SubscribeForm;
 use frontend\models\MessageForm;
-use frontend\models\Form;
+use common\models\Form;
 use \yii\web\UploadedFile;
 use frontend\models\FormsNotarys;
 use frontend\models\Nfiles;

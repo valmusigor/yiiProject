@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\models;
+namespace common\models;
 use frontend\models\FormsNotarys;
 use frontend\models\Notary;
 use Yii;

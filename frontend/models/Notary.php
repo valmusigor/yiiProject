@@ -2,7 +2,7 @@
 
 namespace frontend\models;
 use frontend\models\FormsNotarys;
-use frontend\models\Form;
+use common\models\Form;
 use Yii;
 
 /**

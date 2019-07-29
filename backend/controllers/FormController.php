@@ -1,13 +1,13 @@
 <?php
 
-namespace frontend\controllers;
-use frontend\models\Form;
+namespace backend\controllers;
+use common\models\Form;
 use frontend\controllers\behaviors\AdminBehavior;
 use yii\data\ActiveDataProvider;
 use Yii;
 use yii\db\QueryBuilder;
 
-class AdminController extends \yii\web\Controller
+class FormController extends \yii\web\Controller
 {
     public function behaviors() {
         return [
@@ -16,21 +16,17 @@ class AdminController extends \yii\web\Controller
     }
     public function actionIndex()
     {
-         return $this->render('index');
-    }
-    public function actionForms()
-    {
         $dataProvider = new ActiveDataProvider([
             'query' => Form::find(),
         ]);
 
-        return $this->render('forms', [
+        return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
     }
-    public function actionFormsview($id)
+    public function actionView($id)
     {
-        return $this->render('formsView', [
+        return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -42,7 +38,7 @@ class AdminController extends \yii\web\Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-    public function actionFormscreate()
+    public function actionCreate()
     {
         $model = new Form();
         //получаем данные имеющихся форм для формирования dropDownList
@@ -62,10 +58,10 @@ class AdminController extends \yii\web\Controller
             if($model->type_value==='varchar' && (intval($model->size)>255 || $model->size===''))
               $model->size=255;
             if($model->save()){
-                return $this->redirect(['/admin/formsview', 'id' => $model->id]);
+                return $this->redirect(['/form/view', 'id' => $model->id]);
             }
         }
-        return $this->render('formsCreate', [
+        return $this->render('create', [
             'model' => $model,'name_forms'=>$name_forms,'name_tables'=>$name_tables,
         ]);
     }
@@ -87,7 +83,7 @@ class AdminController extends \yii\web\Controller
         else Yii::$app->session->setFlash('error', 'Access denied');
         return $this->redirect(['/admin/forms']);
     }
-    public function actionFormsupdate($id)
+    public function actionUpdate($id)
     {
         if($id>3){
         $model = $this->findModel($id);
@@ -108,15 +104,15 @@ class AdminController extends \yii\web\Controller
               $model->size=255;
            // Yii::$app->db->createCommand()->addColumn($model->for_table,$model->field_name,$model->type_value.'('.$model->size.')')->execute();
             if ($model->save()) {
-            return $this->redirect(['/admin/formsview', 'id' => $model->id]);
+            return $this->redirect(['/form/view', 'id' => $model->id]);
         }
         }
-        return $this->render('formsUpdate', [
+        return $this->render('update', [
             'model' => $model,'name_forms'=>$name_forms,'name_tables'=>$name_tables,
         ]);
         }
         Yii::$app->session->setFlash('error', 'Access denied');
-        return $this->redirect(['/admin/forms']);
+        return $this->redirect(['/form']);
     }
 
 }

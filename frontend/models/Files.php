@@ -2,7 +2,6 @@
 
 namespace frontend\models;
 use yii\db\ActiveRecord;
-use yii\web\UploadedFile;
 use Yii;
 
 class Files extends ActiveRecord{
