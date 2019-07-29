@@ -1,7 +1,7 @@
 <?php
 
 namespace frontend\controllers;
-use frontend\models\Forms;
+use frontend\models\Form;
 use frontend\controllers\behaviors\AdminBehavior;
 use yii\data\ActiveDataProvider;
 use Yii;
@@ -21,7 +21,7 @@ class AdminController extends \yii\web\Controller
     public function actionForms()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Forms::find(),
+            'query' => Form::find(),
         ]);
 
         return $this->render('forms', [
@@ -36,7 +36,7 @@ class AdminController extends \yii\web\Controller
     }
     protected function findModel($id)
     {
-        if (($model = Forms::findOne($id)) !== null) {
+        if (($model = Form::findOne($id)) !== null) {
             return $model;
         }
 
@@ -44,13 +44,15 @@ class AdminController extends \yii\web\Controller
     }
     public function actionFormscreate()
     {
-        $model = new Forms();
-        $results=Forms::find()->select('form_name')->groupBy('form_name')->asArray()->all();
+        $model = new Form();
+        //получаем данные имеющихся форм для формирования dropDownList
+        $results=Form::find()->select('form_name')->groupBy('form_name')->asArray()->all();
         foreach ($results as $value)
         {
         $name_forms[$value['form_name']]=$value['form_name'];
         }
-        $results=Forms::find()->select('for_table')->groupBy('for_table')->asArray()->all();
+        //получаем данные имеющихся таблиц для формирования dropDownList
+        $results=Form::find()->select('for_table')->groupBy('for_table')->asArray()->all();
         foreach ($results as $value)
         {
         $name_tables[$value['for_table']]=$value['for_table'];
@@ -59,14 +61,9 @@ class AdminController extends \yii\web\Controller
         {
             if($model->type_value==='varchar' && (intval($model->size)>255 || $model->size===''))
               $model->size=255;
-             if($model->type_value==='int' && $model->size==='')
-             {
-              Yii::$app->db->createCommand()->addColumn($model->for_table,$model->field_name,$model->type_value)->execute();
-             }
-             else  Yii::$app->db->createCommand()->addColumn($model->for_table,$model->field_name,$model->type_value.'('.$model->size.')')->execute();
-        if($model->save()){
-            return $this->redirect(['/admin/formsview', 'id' => $model->id]);
-        }
+            if($model->save()){
+                return $this->redirect(['/admin/formsview', 'id' => $model->id]);
+            }
         }
         return $this->render('formsCreate', [
             'model' => $model,'name_forms'=>$name_forms,'name_tables'=>$name_tables,
@@ -75,10 +72,17 @@ class AdminController extends \yii\web\Controller
     public function actionFormsdelete($id)
     {
         if($id>3 && $model=$this->findModel($id))
-        { 
-         Yii::$app->db->createCommand()->dropColumn($model->for_table,$model->field_name)->execute();
-        if($model->delete() )
-        Yii::$app->session->setFlash('success', 'Success delete field');
+        {
+          
+         if($model->formsNotarys)
+         {
+             $model->todelete=1;
+             if($model->save()){
+             Yii::$app->session->setFlash('success', 'Success marked for deletion');
+             }
+         }
+         else if($model->delete() )
+             Yii::$app->session->setFlash('success', 'Success delete field');
         }
         else Yii::$app->session->setFlash('error', 'Access denied');
         return $this->redirect(['/admin/forms']);
@@ -87,22 +91,22 @@ class AdminController extends \yii\web\Controller
     {
         if($id>3){
         $model = $this->findModel($id);
-         $results=Forms::find()->select('form_name')->groupBy('form_name')->asArray()->all();
+         $results=Form::find()->select('form_name')->groupBy('form_name')->asArray()->all();
         foreach ($results as $value)
         {
         $name_forms[$value['form_name']]=$value['form_name'];
         }
-        $results=Forms::find()->select('for_table')->groupBy('for_table')->asArray()->all();
+        $results=Form::find()->select('for_table')->groupBy('for_table')->asArray()->all();
         foreach ($results as $value)
         {
         $name_tables[$value['for_table']]=$value['for_table'];
         }
         if ($model->load(Yii::$app->request->post()) &&  $model->validate()){
             $old_model=$this->findModel($id);
-            Yii::$app->db->createCommand()->dropColumn($old_model->for_table,$old_model->field_name)->execute();
+           // Yii::$app->db->createCommand()->dropColumn($old_model->for_table,$old_model->field_name)->execute();
             if($model->type_value==='varchar' && (intval($model->size)>255 || $model->size===''))
               $model->size=255;
-            Yii::$app->db->createCommand()->addColumn($model->for_table,$model->field_name,$model->type_value.'('.$model->size.')')->execute();
+           // Yii::$app->db->createCommand()->addColumn($model->for_table,$model->field_name,$model->type_value.'('.$model->size.')')->execute();
             if ($model->save()) {
             return $this->redirect(['/admin/formsview', 'id' => $model->id]);
         }

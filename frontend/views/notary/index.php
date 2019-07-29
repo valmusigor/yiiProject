@@ -14,26 +14,36 @@ $columns=[
              */
             [
                 'class' => \yii\grid\SerialColumn::class,
-            ],
+            ]];
+            for($i=0;$i<2;$i++)
+                $columns[]=['attribute'=>'forms.'.$form_field[$i]->field_name,
+                    'format' => 'raw',
+                    'label'=>$form_field[$i]->field_name,
+                    'value'=>function ($model, $key, $index, $column) use($i){
+                    return \yii\helpers\Html::tag(
+                        'span',
+                        $model->formsNotarys[$i]->result_string
+                    );
+                },];   
             /**
              * Перечисленные ниже поля модели отображаются как колонки с данными без изменения
              */
-            'document_name',
-            'country',
-            [ 
-               'attribute' => 'file_name',
+//            'document_name',
+//            'country',
+ $columns[]=           [ 
+               'attribute' => 'nfiles.file_name',
                 'format' => 'raw',
+                'label'=> 'Файл',
                 'value' => function ($model, $key, $index, $column) {
-                    $status = $model->{$column->attribute};
                     return \yii\helpers\Html::tag(
                         'a',
-                        $model->upload_name,
+                        $model->nfiles[0]->upload_name,
                         [
-                            'href' => Yii::getAlias('@showNotary').'/'.$model->file_name[0].'/'.$model->file_name,
+                            'href' => Yii::getAlias('@showNotary').'/'.$model->nfiles[0]->file_name[0].'/'.$model->nfiles[0]->file_name,
                         ]
                     );
                 },
-            ],
+            ];
                            /**
              * Пример краткого описания настроек столбца.
              * Данный способ описания имеет следующий вид attribute_name:output_format:attribute_label.
@@ -42,7 +52,7 @@ $columns=[
 //            /**
 //             * Пример использования форматера
 //             */
-            [
+   $columns[]=            [
                 /**
                  * Имя аттрибута модели
                  */
@@ -51,11 +61,11 @@ $columns=[
                  * Формат вывода
                  */
                 'format' => ['datetime', 'php:h:i:s d-m-Y'],
-            ],
+            ];
             /**
              * Произвольная колонка с определенной логикой отображения и фильтром в виде выпадающего списка
              */
-            [ 
+     $columns[]=          [ 
                'attribute' => 'status',//Название поля модели
                 /**
                  * Формат вывода.
@@ -87,7 +97,8 @@ $columns=[
                         ]
                     );
                 },
-            ],
+            ];
+                $columns[]=   
             [ 
                'attribute' => 'notary_id',
                 'format' => 'raw',
@@ -98,13 +109,11 @@ $columns=[
                         ($notary_id!==NULL)?User::findOne(['id'=>$notary_id])->username:'Ожидание исполнителя'
                     );
                 },
-            ],
+            ];
                         
          
-                         
-        ];
-                 for($i=3;$i<count($form_field);$i++)
-                $columns[]=$form_field[$i]->field_name;
+      
+                     
 $columns[]=/**
              * Колонка кнопок действий
              */
@@ -116,7 +125,7 @@ $columns[]=/**
                 /**
                  * Определяем набор кнопочек. По умолчанию {view} {update} {delete}
                  */
-                'template' => '{subscribe} {cancel} {update} {delete} {repeat} {message}',
+                'template' => '{subscribe} {cancel} {update} {delete} {view} {repeat} {message}',
                  'buttons'=>[
                      'subscribe' => function ($url,$model,$key) {
                             return Html::a('Подписать', $url, ['class' => 'btn btn-success btn-xs']);
@@ -139,8 +148,10 @@ $columns[]=/**
                     'cancel'=>function ($model, $key, $index) { return ($model->status === 2 && Yii::$app->user->identity->role===2 && $model->notary_id===Yii::$app->user->identity->id);},
                     'repeat'=>function ($model, $key, $index) { return ($model->status === 2 && Yii::$app->user->identity->role===2 && $model->notary_id===Yii::$app->user->identity->id);},
                     'message'=>'true',
+                    'view'=>'true',
                 ],    
             ];
+                     $columns[]= 'id';
 echo GridView::widget(
     [
         /**
@@ -162,12 +173,13 @@ echo GridView::widget(
 <div class="row">
     <div class="col-md-5">
         <?php if(Yii::$app->user->identity->role===1): ?>
-  <?php 
+  <?php  
     $form= ActiveForm::begin([
         'id'=>'addRequest',
         'options'=>['enctype'=>'multipart/form-data'],]); ?>
   <?php foreach($form_field as $field): ?>
-  <?= call_user_func_array(array($form->field($model, $field->field_name),$field->type_field),array());?>
+        
+  <?= call_user_func_array(array($form->field($model, $field->field_name),$field->type_field),array())->label($field->field_name);?>
 <?php endforeach;?>
 <div class="row">
     <div class="col-md-6">

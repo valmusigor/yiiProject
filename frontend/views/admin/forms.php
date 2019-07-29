@@ -77,6 +77,19 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'type_value',
             'size',
+            [
+              'attribute' =>'todelete',
+               'format' => 'raw',
+               'value' => function ($model, $key, $index, $column) {
+                    $todelete = $model->{$column->attribute};
+                    return \yii\helpers\Html::tag('span',(($todelete===1) ? 'Да' :'Нет'  ),
+                        [
+                            'class' => 'label label-' . (($todelete===1) ? 'danger' : 'success'),
+                        ]
+                    );
+                },
+                
+            ],            
             //'uniquie',
             //'type_value',
             //'size',

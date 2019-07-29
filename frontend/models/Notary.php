@@ -1,7 +1,8 @@
 <?php
 
 namespace frontend\models;
-
+use frontend\models\FormsNotarys;
+use frontend\models\Form;
 use Yii;
 
 /**
@@ -31,35 +32,38 @@ class Notary extends \yii\db\ActiveRecord
      */
     public function rules()
     {
-        $rules=[];
-        $form_field= Forms::find()->where(['form_name'=>'requestaddform'])->all();
-        foreach ($form_field as $field)
-        {
-         if($field->required===1)   
-             $rules[]=[$field->field_name,'required'];
-         if($field->uniquie===1)   
-             $rules[]=[$field->field_name,'unique'];
-         if($field->type_value==='varchar')
-             $rules[]=($field->size)?[$field->field_name,'string','max'=>$field->size]:[$field->field_name,'string'];
-         if($field->type_value==='int')
-             $rules[]=[$field->field_name,'integer'];
-         if($field->type_field==='fileInput')
-         {
-             if(is_array($field->extensions)){
-                 foreach ($field->extensions as $ext)
-                     $extensions[]=$ext;
-                 $rules[]=($field->file_size)?[$field->field_name,'file','extensions' =>$extensions,'maxSize' =>$field->file_size ]
-                         :[$field->field_name,'file','extensions' =>$extensions];
-             }
-             else{
-                 $rules[]=($field->file_size)?[$field->field_name,'file','extensions' =>$field->extensions,'maxSize' =>$field->file_size ]
-                         :[$field->field_name,'file','extensions' =>$field->extensions];
-             }
-         }
-        }
-        $rules[]=[['time_create_request', 'client_id', 'notary_id', 'status'], 'integer'];
+//        $rules=[];
+//        $form_field= Form::find()->where(['form_name'=>'requestaddform'])->all();
+//        foreach ($form_field as $field)
+//        {
+//         if($field->required===1)   
+//             $rules[]=[$field->field_name,'required'];
+//         if($field->uniquie===1)   
+//             $rules[]=[$field->field_name,'unique'];
+//         if($field->type_value==='varchar')
+//             $rules[]=($field->size)?[$field->field_name,'string','max'=>$field->size]:[$field->field_name,'string'];
+//         if($field->type_value==='int')
+//             $rules[]=[$field->field_name,'integer'];
+//         if($field->type_field==='fileInput')
+//         {
+//             if(is_array($field->extensions)){
+//                 foreach ($field->extensions as $ext)
+//                     $extensions[]=$ext;
+//                 $rules[]=($field->file_size)?[$field->field_name,'file','extensions' =>$extensions,'maxSize' =>$field->file_size ]
+//                         :[$field->field_name,'file','extensions' =>$extensions];
+//             }
+//             else{
+//                 $rules[]=($field->file_size)?[$field->field_name,'file','extensions' =>$field->extensions,'maxSize' =>$field->file_size ]
+//                         :[$field->field_name,'file','extensions' =>$field->extensions];
+//             }
+//         }
+//        }
+//        $rules[]=[['time_create_request', 'client_id', 'notary_id', 'status'], 'integer'];
         
-        return $rules;
+         return [
+            [['time_create_request', 'client_id', 'notary_id', 'status'], 'integer'],
+            [['time_create_request', 'client_id', 'status'], 'required'],
+        ];
 //        [
 //            [['time_create_request', 'client_id', 'notary_id', 'status'], 'integer'],
 //            [['document_name'], 'string', 'max' => 40],
@@ -87,14 +91,6 @@ class Notary extends \yii\db\ActiveRecord
             'status' => 'Статус',
         ];
     }
-    
-   public static function deleteFile($file_name){
-       $path=Yii::getAlias('@uploadNotary').'/'.$file_name[0].'/'.$file_name;
-        if(file_exists($path) && unlink($path)){
-            return true;
-        }
-        return false;
-   }
    public static function getStatus($id){
        return self::findOne(['id'=>$id])->status;
    }
@@ -104,11 +100,22 @@ class Notary extends \yii\db\ActiveRecord
    public static function getNotary($id){
         return self::findOne(['id'=>$id]);
    }
-   public  function upload($file_obj){
-           $file_name=md5($file_obj->baseName.rand(1,99).time()).'.'.$file_obj->extension;
-           if(!file_exists(Yii::getAlias('@uploadNotary').'/'.$file_name[0]))
-           mkdir(Yii::getAlias('@uploadNotary').'/'.$file_name[0],0777, true);
-           $file_obj->saveAs(Yii::getAlias('@uploadNotary').'/'.$file_name[0].'/'.$file_name);
-           return $file_name;
-   } 
+   public function getFormsNotarys()
+    {
+        return $this->hasMany(FormsNotarys::className(), ['notary_id' => 'id']);
+    }
+    public function getNfiles()
+    {
+        return $this->hasMany(Nfiles::className(), ['order_id' => 'id']);
+    }
+   public function getForms()
+    {
+        return $this->hasMany(Form::className(), ['id' => 'forms_id'])
+            ->viaTable('forms_notarys',['notary_id' => 'id']);
+    }
+    public function createBaseNotary(){
+        $this->time_create_request=time();
+        $this->client_id=Yii::$app->user->identity->id;
+        $this->status=1;
+    }
 }

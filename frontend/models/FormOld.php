@@ -16,7 +16,7 @@ use Yii;
  * @property int $size
  * @property string $for_table
  */
-class Forms extends \yii\db\ActiveRecord
+class Form extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}

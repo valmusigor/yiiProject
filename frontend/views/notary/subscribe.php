@@ -4,14 +4,7 @@ use yii\helpers\Html;
 ?>
 <div class="row">
     <div class="col-md-5">
-        <div><?=$notary->document_name?></div>
-        <div><?=$notary->country?></div>
-        <div>
-            <a href =<?=Yii::getAlias('@showNotary').'/'.$notary->file_name[0].'/'.$notary->file_name?>>
-            <?=$notary->upload_name?>
-            </a>
-        </div>
-        <pre><?= print_r($notary)?></pre>
+       <?=$this->render('view',['model'=>$notary]);?>
     </div>
     <div class="col-md-5">
   <?php 
